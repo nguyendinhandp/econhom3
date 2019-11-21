@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ecoNhom3.Models.HoaDon>
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">ORDERS</h3>
+    <br />
+    <br />
+    <div class="row" style="margin-right:-15px;margin-left:-96px; margin-left:5px;">
+        <div class="products-breadcrumb" style="background-color:#a5c29e;padding:0.5em 14px;">
+            <ul>
+                <span>Sreach</span>
+                <input type="text" id="txtSearch" placeholder="Nhập từ khóa" />
+            </ul>
+        </div>
+        <div id="results"></div>
+        <script>$("#txtSearch").keyup(function () {
+                $.ajax({
+                    url: "/HoaDons/Search",
+                    data: { keyword: $(this).val() },
+                    type: "GET",
+                    success: function (response) {
+                        $("#results").html(response);
+                    }
+                });
+            });</script>
+    </div>
+    <p>
+        <a asp-action="Create" class="w3-bar-item w3-button w3-padding w3-pale-red"><i class="fa fa-plus-square"></i> ADD ORDER</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Mã Hóa Đơn
+                </th>
+                <th>
+                    Ngày Đặt
+                </th>
+                <th>
+                    Trạng Thái Đơn Hàng
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaHd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayDat)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-danger" asp-action="giamtrth" asp-controller="HoaDons" asp-route-id="@item.MaHd"><</a>@Html.DisplayFor(modelItem => item.TrangThai.TenTrangThai)<a asp-action="tangtrth" asp-controller="HoaDons" asp-route-id="@item.MaHd" class="btn btn-info">></a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MaHd" class="w3-pale-yellow w3-button">Sửa</a> |
+                        <a asp-action="chitietdonhang" asp-controller="HoaDons" asp-route-id="@item.MaHd" class="w3-pale-blue w3-button">Chi Tiết</a> |
+                        <a asp-action="Delete" asp-route-id="@item.MaHd" class="w3-pale-red w3-button">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

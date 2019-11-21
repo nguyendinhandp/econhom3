@@ -1,0 +1,78 @@
+﻿@model ecoNhom3.Models.ThanhVien
+@using Microsoft.AspNetCore.Http
+
+
+@{
+    ViewData["Title"] = "Details";
+    @if (Context.Session.GetInt32("LoaiTv") == 1)
+    {
+        Layout = "_Admin";
+    }
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        .mainmenu {
+            margin-left: 30%;
+        }
+
+        table, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        tr, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">PROFILE</h3>
+    <br />
+    <br />
+    <table class="mainmenu">
+        <tr>
+            <td>Họ Tên: </td>
+            <td> @Html.DisplayFor(model => model.TenTv)</td>
+        </tr>
+        <tr>
+            <td>Giới tính: </td>
+            <td> @Html.DisplayFor(model => model.GioiTinh)</td>
+        </tr>
+        <tr>
+            <td>Ngày Sinh: </td>
+            <td> @Html.DisplayFor(model => model.NgaySinh)</td>
+        </tr>
+        <tr>
+            <td>Địa Chỉ: </td>
+            <td> @Html.DisplayFor(model => model.DiaChi)</td>
+        </tr>
+        <tr>
+            <td>SĐT: </td>
+            <td> @Html.DisplayFor(model => model.DienThoai)</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td> @Html.DisplayFor(model => model.Email)</td>
+        </tr>
+
+        <tr>
+            <td>Tên Đăng Nhập: </td>
+            <td> @Html.DisplayFor(model => model.TaiKhoan)</td>
+        </tr>
+
+
+    </table>
+    <br />
+    <br />
+    <div class="mainmenu">
+        <a asp-action="Edit" asp-controller="ThanhViens" asp-route-id="@Model.MaTv" class="w3-bar-item w3-padding w3-pale-yellow w3-button">Sửa</a>
+        <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@Model.MaTv" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
+        <a asp-action="Index" asp-controller="Home" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>

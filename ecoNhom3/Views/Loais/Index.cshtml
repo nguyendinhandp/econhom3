@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ecoNhom3.Models.Loai>
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">Sản Phẩm </h3>
+    <br />
+    <br />
+    <p>
+        <a asp-action="Create" class="w3-bar-item w3-button w3-padding w3-pale-green"><i class="fa fa-plus-square"></i> Thêm Loại SP</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Mã Loại
+                </th>
+                <th>
+                    Tên Loại
+                </th>
+                
+            </tr>
+        </thead>
+       
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenLoai)
+                </td>
+                <td>
+                    <a asp-controller="Loais" asp-action="Edit" asp-route-id="@item.MaLoai" class="w3-pale-yellow w3-button">Sửa</a> |
+                    <a asp-controller="Loais" asp-action="Delete" asp-route-id="@item.MaLoai" class="w3-pale-red w3-button">Xóa</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>

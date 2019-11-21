@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "ShowNuocSuoi";
+}
+
+
+<h2 style="color: #6ea534;font-size: 50px; text-align:center;"> CÁC SẢN PHẨM NƯỚC SUỐI: </h2>
+
+<div class="banner_bottom" style="padding:1em 0 !important;">
+    <div class="wthree_banner_bottom_left_grid_sub">
+    </div>
+
+
+    <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
+        @{
+            MyDbContext db = new MyDbContext();
+            var nuocsuoi = db.HangHoas.Where(p => p.MaLoai == 2);
+
+        }
+        @{
+            foreach (var item in nuocsuoi)
+            {
+                double a = (double)item.GiamGia * 100;
+                item.GiamGia = a;
+                <div class="col-sm-4 wthree_banner_bottom_left">
+
+                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                       asp-route-id="@item.MaHh">
+
+                        <img src="~/images/@item.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; border: 1px solid #9ECDBD ;" />
+                        <span class="thongtinsanpham">
+                            <h4 class="tensanpham">@item.TenHh</h4>
+                            <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
+                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia) /Chai</div>
+                            @{
+                                double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
+                                item.DonGia = b;
+                            }
+                            <div style="float:left;">
+                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia) / Chai</span>
+                            </div>
+
+                        </span>
+                        <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                            @item.TenHh
+                        </p>
+                        <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                            @String.Format("{0:0,0 đ}", item.DonGia) / Chai
+                        </p>
+                    </a>
+
+                </div>
+            }
+        }
+    </div>
+    <div class="clearfix"> </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model ecoNhom3.Models.PhanLoaiTV
+@{
+    ViewData["Title"] = "Details";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        .mainmenu {
+            margin-left: 30%;
+        }
+
+        table, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        tr, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">TYPE OF USERS</h3>
+    <br />
+    <br />
+    <table class="mainmenu">
+        <tr>
+            <td>Loại Người Dùng: </td>
+            <td>@Html.DisplayFor(model => model.LoaiThanhVien)</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <div class="mainmenu">
+        <a asp-action="Edit" asp-route-id="@Model.LoaiTv" class="w3-bar-item w3-padding w3-pale-yellow w3-button">Sửa</a>
+        <a asp-action="Delete" asp-route-id="@Model.LoaiTv" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
+        <a asp-action="Index" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+    </div>
+</body>

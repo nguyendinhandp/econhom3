@@ -1,0 +1,59 @@
+﻿@model ecoNhom3.Models.HoaDon
+@{
+    ViewData["Title"] = "Create";
+}
+<h2>Create</h2>
+<h4>HoaDon</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaTv" class="control-label"></label>
+                <select asp-for="MaTv" class="form-control" asp-items="ViewBag.MaTv"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDat" class="control-label"></label>
+                <input asp-for="NgayDat" class="form-control" />
+                <span asp-validation-for="NgayDat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayGiao" class="control-label"></label>
+                <input asp-for="NgayGiao" class="form-control" />
+                <span asp-validation-for="NgayGiao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoTen" class="control-label"></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaChi" class="control-label"></label>
+                <input asp-for="DiaChi" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="PhiShip" class="control-label"></label>
+                <input asp-for="PhiShip" class="form-control" />
+                <span asp-validation-for="PhiShip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaTrangThai" class="control-label"></label>
+                <select asp-for="MaTrangThai" class="form-control" asp-items="ViewBag.MaTrangThai"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GhiChu" class="control-label"></label>
+                <input asp-for="GhiChu" class="form-control" />
+                <span asp-validation-for="GhiChu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

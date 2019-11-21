@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ecoNhom3.Models.HangHoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">Sản Phẩm</h3>
+    <br />
+    <br />
+         <a asp-action="Create" class="w3-bar-item w3-button w3-padding w3-pale-green"><i class="fa fa-plus-square"></i> Thêm Sản Phẩm</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Tên Sản Phẩm
+                </th>
+
+                <th>
+                    Đơn Giá
+                </th>
+                <th>
+                    Giảm Giá
+                </th>
+                <th>
+                    Loại
+                </th>
+                <th>
+                    Nhà Cung Cấp
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenHh)</td>
+                <td>@Html.DisplayFor(modelItem => item.DonGia)</td>
+                <td>@Html.DisplayFor(modelItem => item.GiamGia)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaLoai)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaNcc)</td>
+
+                <td>
+                    <a asp-controller="HangHoas" asp-action="Edit" asp-route-id="@item.MaHh" class="w3-pale-yellow w3-button">Sửa</a> |
+
+                    <a asp-controller="HangHoas" asp-action="Delete" asp-route-id="@item.MaHh" class="w3-pale-red w3-button">Xóa</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>

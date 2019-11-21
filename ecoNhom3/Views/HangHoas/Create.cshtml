@@ -1,0 +1,67 @@
+﻿@model ecoNhom3.Models.HangHoa
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        .mainmenu {
+            margin-left: 24%;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">PRODUCTS</h3>
+    <hr />
+    <div class="row mainmenu">
+        <div class="col-md-8">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    Tên Hàng hóa
+                    <input asp-for="TenHh" class="form-control" />
+                    <span asp-validation-for="TenHh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Loại
+                    <select asp-for="MaLoai" class="form-control" asp-items="ViewBag.MaLoai"></select>
+                </div>
+                <div class="form-group">
+                    Giá
+                    <input asp-for="DonGia" class="form-control" />
+                    <span asp-validation-for="DonGia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Hình
+
+                    <input type="file" name="myfile" multiple />
+                    <span asp-validation-for="Hinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Nhà Cung Cấp
+                    <select asp-for="MaNcc" class="form-control" asp-items="ViewBag.MaNcc"></select>
+                </div>
+                
+                <div class="form-group">
+                    Mô Tả
+                    <input asp-for="MoTa" class="form-control" />
+                    <span asp-validation-for="MoTa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Giảm Giá
+                    <input asp-for="GiamGia" class="form-control" />
+                    <span asp-validation-for="GiamGia" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Thêm" class="w3-bar-item w3-padding w3-pale-red" />
+                    <a asp-action="Index" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

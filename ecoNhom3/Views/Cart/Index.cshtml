@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Hình</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                    <th></th>
+                </tr>
+
+
+                @foreach (var item in ViewBag.cart)
+                {
+                <tr>
+                    <td class="text-center"><img src="~/images/@item.HangHoa.Hinh" width="70" height="60" /> </td>
+                    <td><a asp-action="chitiet" asp-controller="HangHoas" asp-route-id="@item.HangHoa.MaHh"> @item.HangHoa.TenHh </a> </td>
+
+                    <td width="80px">
+                        <form asp-action="Update" asp-controller="Cart" asp-route-id="@item.HangHoa.MaHh" method="get">
+                            <input type="hidden" name="id" value="@item.HangHoa.MaHh"  />
+                            <input type="number" min="1" step="1" name="sl" value="@item.Quantity"  />
+                            <button type="submit" class="btn btn-primary btn-sm" width="80px"> Cập nhật </button>
+                        </form>
+                    </td>
+                    <td> @String.Format("{0:0,0 đ}", item.HangHoa.Price) </td>
+                    <td> @String.Format("{0:0,0 đ}", (item.HangHoa.Price * item.Quantity)) </td>
+
+                    <td> <a asp-controller="cart" asp-action="remove" asp-route-id="@item.HangHoa.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">Tổng thành tiền:</td>
+                    <td>@String.Format("{0:0,0 đ}", (ViewBag.total)) </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+        <button class="btn btn-primary btn-sm"> Thanh Toán </button>
+
+      
+
+
+    </div>
+
+    
+
+</div>
+

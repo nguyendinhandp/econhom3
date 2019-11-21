@@ -1,0 +1,48 @@
+﻿@model ecoNhom3.Models.ChiTietHd
+@{
+    ViewData["Title"] = "Delete";
+}
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ChiTietHd</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoaDon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HoaDon.MaHd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HangHoa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HangHoa.MaHh)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GiamGia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GiamGia)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaCTHD" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

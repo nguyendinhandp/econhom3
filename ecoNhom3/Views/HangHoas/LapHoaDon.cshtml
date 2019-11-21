@@ -1,0 +1,111 @@
+﻿@model ThanhToanView
+@{
+    ViewData["Title"] = "LapHoaDon";
+}
+<title>@ViewData["Title"] - ecoNhom3</title>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<link href="~/css/mycss.css" rel="stylesheet" />
+<div class="container">
+
+    <div class="row" style="height:200px;">
+        <div class="col-sm-3" style="height:200px;">
+            <div style="height: 60%;width:10px; background-color:black;float:right;margin:20px;"></div>
+            <span style="float: right;font-size: 51px;color: #d61816;font-weight: 700;">ecoNhom3</span>
+        </div>
+        <div class="col-sm-3" style="height:200px;">
+            <h1 style="color: #ff6c00;">THANH TOÁN</h1>
+        </div>
+        <div class="col-sm-3" style="height:200px;">
+        </div>
+        <div class="col-sm-3" style="height:200px;">
+        </div>
+    </div>
+    <div class="row" style="height: 146px;">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8" style="background-color: #e2efc9;border-radius: 10px; padding:10px;">
+            <h1>Địa Chỉ Nhận Hàng</h1>
+            <br />
+            <span style="font-weight:800; font-size:16px;">@Model.thongtinKH.TENKH,ĐT:@Model.thongtinKH.SDT.</span>,ĐC: @Model.thongtinKH.DCNHAN, Mặc Định <a asp-action="thaydoithongtindcnhan" asp-controller="ThanhViens">THAY ĐỔI</a>
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8 " style="background-color:#e4fb0e96;padding:10px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên Sản Phẩm
+                        </th>
+                        <th>
+                            Đơn Giá
+                        </th>
+                        <th>
+                            Số Lượng
+                        </th>
+                        <th>
+                            Giảm Giá
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Cthd)
+                    {
+                        double a = (double)item.GiamGia * 100;
+                        item.GiamGia = a;
+                        <tr>
+                            <td>
+                                @item.HangHoa.TenHh
+                            </td>
+                            <td>
+                                @item.DonGia .000 đ
+                            </td>
+                            <td>
+                                @item.SoLuong
+                            </td>
+                            <td>
+                                @item.GiamGia
+                            </td>
+                            @{
+                                item.GiamGia = (double)a / 100;
+                            }
+                            <td>
+                                @item.ThanhTien .000 đ
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <hr />
+            <span style="float:right; margin-right:10px;">Tổng cộng:@ViewBag.TongTien .000 đ</span>
+            <form asp-action="hoattatdonhang" asp-controller="HangHoas" method="post">
+                <div class="form-group">
+                    <span style="font-weight: 700;font-size: 19px;">Hình Thức Thanh Toán:</span>
+                    <!--  <select asp-for="......" class="form-control" asp-items="ViewBag.ThanhToanID" name="tt"></select> -->
+                    <br />
+                    <span style="font-weight: 700;font-size: 19px;">Hình Thức Vận Chuyển: Ship Tận Nơi</span>
+                   
+                </div>
+                <button type="submit" class="btn btn-danger" style="width:30%;float:right;">Hoàn Tất Đơn Hàng</button>
+
+            </form>
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div>
+
+
+</div>

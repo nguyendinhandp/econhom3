@@ -1,0 +1,74 @@
+﻿@model ecoNhom3.Models.ThanhVien
+@{
+    ViewData["Title"] = "Edit";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        .mainmenu {
+            margin-left: 24%;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">ACCOUNTS</h3>
+    <hr />
+    <div class="row mainmenu">
+        <div class="col-md-8">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MaTv" />
+                <div class="form-group">
+                    Họ Tên
+                    <input asp-for="TenTv" class="form-control" />
+                    <span asp-validation-for="TenTv" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Giới Tính
+                    <input asp-for="GioiTinh" class="form-control" />
+                    <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Ngày Sinh
+                    <input asp-for="NgaySinh" class="form-control" />
+                    <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Địa Chỉ
+                    <input asp-for="DiaChi" class="form-control" />
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    SĐT
+                    <input asp-for="DienThoai" class="form-control" />
+                    <span asp-validation-for="DienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Email
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+               
+                <div class="form-group">
+                    Loại Người dùng
+                    <select asp-for="LoaiTv" class="form-control" asp-items="ViewBag.LoaiTv"></select>
+                    <span asp-validation-for="LoaiTv" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Tên Đăng nhập
+                    <input asp-for="TaiKhoan" class="form-control" />
+                    <span asp-validation-for="TaiKhoan" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Lưu" class="w3-bar-item w3-padding w3-pale-red" />
+                    <a asp-action="Index" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

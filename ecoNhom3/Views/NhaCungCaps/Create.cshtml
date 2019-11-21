@@ -1,0 +1,56 @@
+﻿@model ecoNhom3.Models.NhaCungCap
+@{
+    ViewData["Title"] = "Create";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        .mainmenu {
+            margin-left: 24%;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">BRANDS</h3>
+    <hr />
+    <div class="row mainmenu">
+        <div class="col-md-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    Tên Nhà Cung Cấp
+                    <input asp-for="TenNcc" class="form-control" />
+                    <span asp-validation-for="TenNcc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Địa Chỉ
+                    <input asp-for="DiaChi" class="form-control" />
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    SĐT
+                    <input asp-for="DienThoai" class="form-control" />
+                    <span asp-validation-for="DienThoai" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Email
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Mô Tả
+                    <input asp-for="MoTa" class="form-control" />
+                    <span asp-validation-for="MoTa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Thêm" class="w3-bar-item w3-padding w3-pale-red" />
+                    <a asp-action="Index" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

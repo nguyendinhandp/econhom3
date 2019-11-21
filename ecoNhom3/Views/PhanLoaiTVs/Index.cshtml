@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ecoNhom3.Models.PhanLoaiTV>
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Admin";
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <h3 class="w3-bar-item w3-padding w3-white" style="width:100%; text-align: center">TYPE OF USERS</h3>
+    <br />
+    <br />
+    <p>
+        <a asp-action="Create" class="w3-bar-item w3-button w3-padding w3-pale-red"><i class="fa fa-plus-square"></i> ADD CATEGORY</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LoaiThanhVien)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoaiThanhVien)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.LoaiTv" class="w3-pale-yellow w3-button">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.LoaiTv" class="w3-pale-blue w3-button">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.LoaiTv" class="w3-pale-red w3-button">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
