@@ -77,6 +77,12 @@ namespace ecoNhom3
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+
+                   name: "ChiTiet",
+                   template: "{title}/{id}",
+                   defaults: new { controller = "News", action = "Detail" });
+
+                routes.MapRoute(
                     
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

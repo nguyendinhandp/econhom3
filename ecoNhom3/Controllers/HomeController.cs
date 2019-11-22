@@ -69,9 +69,10 @@ namespace ecoNhom3.Controllers
            
         }
 
-        public IActionResult ShowNuocNgot()
+    
+        public IActionResult ShowNuocNgot(string title)
         {
-
+          
             return View();
         }
         public IActionResult ShowNuocSuoi()

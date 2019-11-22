@@ -159,6 +159,7 @@ namespace ecoNhom3.Controllers
             return _context.HangHoas.Any(e => e.MaHh == id);
         }
 
+       
         public IActionResult ChiTiet(int? id)
         {
             ChiTietView model = new ChiTietView();
@@ -181,6 +182,8 @@ namespace ecoNhom3.Controllers
             model.hh = hh;
             model.hhCungLoai = dshhcl;
             model.hhCungNcc = dshhcnhacc;
+
+          
 
             return View(model);
         }
