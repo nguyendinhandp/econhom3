@@ -1,6 +1,6 @@
 ﻿@model ecoNhom3.Models.ChiTietView
 @{
-    ViewData["Title"] = "Chi Tiết Sản Phẩm";
+    ViewData["Title"] = "chi-tiet-san-pham";
 }
 
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -8,8 +8,11 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
+
+
 <div class="row">
-    <div class="col-sm-4" style="height:500px;" >
+   
+    <div class="col-sm-4" style="height:500px;">
         <img src="~/images/@Model.hh.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; " />
         <hr />
     </div>
@@ -21,7 +24,7 @@
         <br />
         <h4>Đơn giá :   <span style="color:coral;font-size:20px; margin-left: 5px"> @String.Format("{0:0,0 đ}", Model.hh.DonGia) / SP</span></h4>
         @{
-            double b = (double)(Model.hh.DonGia - ((double)((Model.hh.DonGia * Model.hh.GiamGia) )));
+            double b = (double)(Model.hh.DonGia - ((double)((Model.hh.DonGia * Model.hh.GiamGia))));
 
         }
         <h4>Giá bán :   <span style="color:coral;font-size:20px; margin-left: 5px"> @String.Format("{0:0,0 đ}", b) / SP </span></h4>
@@ -37,7 +40,7 @@
             <br />
             <div class="row">
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary" style="width:185px;" >Thêm Vào Giỏ</button>
+                    <button type="submit" class="btn btn-primary" style="width:185px;">Thêm Vào Giỏ</button>
                 </div>
             </div>
         </form>

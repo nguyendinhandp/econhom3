@@ -20,7 +20,7 @@ namespace ecoNhom3.Controllers
             _context = context;
         }
 
-        // GET: api/HoaDons
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<HoaDon>>> Index()
         {
@@ -29,7 +29,7 @@ namespace ecoNhom3.Controllers
         }
 
         // GET: api/HoaDons/5
-        [HttpGet("{id}")]
+       
         public async Task<ActionResult<HoaDon>> Details(int id)
         {
             var hoaDon = await _context.HoaDons
@@ -138,7 +138,7 @@ namespace ecoNhom3.Controllers
             {
 
                 HoaDon hd = _context.HoaDons.Include(x => x.ThanhVien).Include(x => x.TrangThai).Where(p => p.MaHd == id).First();
-                ct = _context.ChiTietHds.Include(x => x.HangHoa).Where(p => p.MaHd == hd.MaHd).ToList();
+              //  ct = _context.ChiTietHds.Include(x => x.HangHoa).Where(p => p.MaHd == hd.MaHd).ToList();
                 model.hd = hd;
                 model.chitiethd = ct;
             }

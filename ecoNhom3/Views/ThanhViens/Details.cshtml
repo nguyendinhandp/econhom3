@@ -4,9 +4,12 @@
 
 @{
     ViewData["Title"] = "Details";
-    @if (Context.Session.GetInt32("LoaiTv") == 1)
+    if (Context.Session.GetInt32("LoaiTv") == 1)
     {
         Layout = "_Admin";
+    }else
+    {
+        Layout = "_Customer";
     }
 }
 <head>
@@ -69,7 +72,7 @@
     <br />
     <div class="mainmenu">
         <a asp-action="Edit" asp-controller="ThanhViens" asp-route-id="@Model.MaTv" class="w3-bar-item w3-padding w3-pale-yellow w3-button">Sửa</a>
-        <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@Model.MaTv" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
+        
         <a asp-action="Index" asp-controller="Home" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>
     </div>
     @section Scripts {

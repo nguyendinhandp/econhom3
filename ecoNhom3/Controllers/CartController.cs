@@ -24,9 +24,18 @@ namespace ecoNhom3.Controllers
         [Route("index")]
         public ActionResult Index()
         {
-            var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
-            ViewBag.cart = cart;
-            ViewBag.total = cart.Sum(item => item.HangHoa.Price * item.Quantity);
+            if (Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart") == null)
+            {
+                return View("error");
+            }
+            else
+            {
+                var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
+                ViewBag.cart = cart;
+
+                ViewBag.total = cart.Sum(item => item.HangHoa.Price * item.Quantity);
+            }
+                
             return View();
         }
 

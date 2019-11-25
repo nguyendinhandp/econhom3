@@ -28,7 +28,7 @@ namespace ecoNhom3.Controllers
         }
 
         // GET: api/PhanLoaiTVs/5
-        [HttpGet("{id}")]
+       
         public async Task<ActionResult<PhanLoaiTV>> Details(int id)
         {
             var phanLoai = await _context.PhanLoaiTVs

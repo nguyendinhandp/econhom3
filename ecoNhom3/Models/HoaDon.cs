@@ -34,6 +34,8 @@ namespace ecoNhom3.Models
         [ForeignKey ("MaTrangThai")]
         public TrangThai TrangThai { get; set; }
 
+        public int MaCthd { get; set; }
+        [ForeignKey("MaCTHD")]
         public ChiTietHd ChiTietHd { get; set; }
         public double TongTienHang => ChiTietHd.ThanhTien;
  

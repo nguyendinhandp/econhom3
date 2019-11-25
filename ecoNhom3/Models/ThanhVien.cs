@@ -24,8 +24,16 @@ namespace ecoNhom3.Models
         [ForeignKey("LoaiTv")]
         public PhanLoaiTV PhanLoaiTV { get; set; }
 
+
+        [Display(Name = "Tài khoản")]
+        [Required(ErrorMessage = "Nhập Tài Khoản")]
+        [MaxLength(50, ErrorMessage = "Tối đa 50 ký tự")]
         public string TaiKhoan { get; set; }
 
+        [Display(Name = "Mật Khẩu")]
+        [Required(ErrorMessage = "Nhập Mật Khẩu")]
+        [MaxLength(50, ErrorMessage = "Tối đa 50 ký tự")]
+        [DataType(DataType.Password)]
         public string MatKhau { get; set; }
 
         public string GioiTinh { get; set; }

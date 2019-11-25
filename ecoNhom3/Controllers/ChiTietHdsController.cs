@@ -20,21 +20,16 @@ namespace ecoNhom3.Controllers
             _context = context;
         }
 
-        // GET: api/ChiTietHds
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ChiTietHd>>> Index()
+        
+        public IActionResult Index()
         {
-            var myDbContext = _context.ChiTietHds.Include(c => c.HangHoa).Include(c => c.HoaDon);
-            return await _context.ChiTietHds.ToListAsync();
+            return View();
         }
 
-        // GET: api/ChiTietHds/5
-        [HttpGet("{id}")]
         public async Task<ActionResult<ChiTietHd>> Details(int id)
         {
             var chiTietHd = await _context.ChiTietHds
-               .Include(c => c.HangHoa)
-               .Include(c => c.HoaDon)
+               .Include(c => c.HangHoa)               
                .FirstOrDefaultAsync(m => m.MaCTHD == id);
 
             if (chiTietHd == null)
@@ -64,7 +59,7 @@ namespace ecoNhom3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", chiTietHd.MaHh);
-            ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd", chiTietHd.MaHd);
+           
             return View(chiTietHd);
         }
         // GET: ChiTietHds/Edit/5
@@ -81,7 +76,7 @@ namespace ecoNhom3.Controllers
                 return NotFound();
             }
             ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", chiTietHd.MaHh);
-            ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd", chiTietHd.MaHd);
+        
             return View(chiTietHd);
         }
 
@@ -113,11 +108,11 @@ namespace ecoNhom3.Controllers
                 }
             }
             ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", chiTietHd.MaHh);
-            ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd", chiTietHd.MaHd);
+        
             return View(chiTietHd);
         }
 
-        // POST: api/ChiTietHds
+      
         [HttpPost]
         public async Task<ActionResult<ChiTietHd>> PostChiTietHd(ChiTietHd chiTietHd)
         {
@@ -126,7 +121,7 @@ namespace ecoNhom3.Controllers
 
             return CreatedAtAction("GetChiTietHd", new { id = chiTietHd.MaCTHD }, chiTietHd);
         }
-        // GET: ChiTietHds/Delete/5
+      
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +131,7 @@ namespace ecoNhom3.Controllers
 
             var chiTietHd = await _context.ChiTietHds
                 .Include(c => c.HangHoa)
-                .Include(c => c.HoaDon)
+                
                 .FirstOrDefaultAsync(m => m.MaCTHD == id);
             if (chiTietHd == null)
             {
@@ -146,7 +141,7 @@ namespace ecoNhom3.Controllers
             return View(chiTietHd);
         }
 
-        // DELETE: api/ChiTietHds/5
+       
         [HttpDelete("{id}")]
         public async Task<ActionResult<ChiTietHd>> DeleteChiTietHd(int id)
         {

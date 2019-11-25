@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Sản Phẩm Nước Ngọt";
+    ViewData["Title"] = "san pham nuoc ngot";
 }
 
 
@@ -25,8 +25,7 @@
                 item.GiamGia = a;
                 <div class="col-sm-4 wthree_banner_bottom_left">
 
-                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.MaHh">
+                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1" asp-route-id="@item.MaHh">
 
                         <img src="~/images/@item.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; border: 1px solid #9ECDBD ;" />
                         <span class="thongtinsanpham">

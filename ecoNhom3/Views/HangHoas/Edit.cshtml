@@ -40,14 +40,8 @@
                 <div class="form-group">
                     Hình
                     <div style="width:auto;height:210px; ">
-                        @foreach (var item in ViewBag.arr)
-                        {
-                            if (item != "")
-                            {
-                                <img style="width:220px;height:200px;float:left; padding:5px;" src="~/images/@item" class="img-thumbnail" alt="Cinque Terre" />
+                        <img style="width:220px;height:200px;float:left; padding:5px;" src="~/images/@Model.Hinh" class="img-thumbnail" alt="Cinque Terre" />
 
-                            }
-                        }
                     </div>
                     Khác
                     <input type="file" name="myfile" multiple />

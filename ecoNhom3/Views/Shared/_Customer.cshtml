@@ -3,10 +3,11 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewData["Title"] - ecoNhom3</title>
+    <title>@ViewData["Title"] - Customer</title>
 
     <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
     <link rel="shortcut icon" type="image/ico" href="~/images/logo.jpg" />
@@ -22,8 +23,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
-    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true"/>
-    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all"asp-append-version="true" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
     <!-- font-awesome icons -->
     <link href="~/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
     <!-- //font-awesome icons -->
@@ -56,8 +57,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 @if (Context.Session.GetInt32("MaTv") == null)
                 {
                     <ul class="dropdown-menu">
-                        <li><a asp-controller="ThanhViens" asp-action="Create">Đăng ký tài khoản</a></li>
-                    
                         <li><a asp-controller="ThanhViens" asp-action="Login">Đăng nhập</a></li>
                     </ul>
 
@@ -83,9 +82,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
 
             <div class="product_list_header">
-
                 <a asp-action="Index" asp-controller="Cart">
-                    <input type="submit" name="name" value="Giỏ Hàng" class="button"/>
+                    <input type="submit" name="name" value="Giỏ Hàng" class="button" />
                 </a>
             </div>
             <div class="nav navbar-nav navbar-right" style="margin-right:10px;">
@@ -137,29 +135,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                                 <ul class="nav navbar-nav nav_1">
-                                    <li><a href="#" style="color:#fff;background-color:brown;font-size:18px;font-weight:bold;">Sản Phẩm</a></li>
+                                    <li><a  style="color:#fff;background-color:brown;font-size:18px;font-weight:bold;"> TK: @Context.Session.GetString("TaiKhoan")</a></li>
 
                                     <li>
-                                        <a style="padding:4px 0px 4px 40px;" asp-action="ShowNuocNgot" asp-controller="Home">
-                                            Nước Ngọt
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Details" asp-route-id="@Context.Session.GetInt32("MaTv")">
+                                            Thông tin tài khoản
                                         </a>
                                     </li>
                                     <li>
-                                        <a style="padding:4px 0px 4px 40px;" asp-action="ShowNuocSuoi" asp-controller="Home">
-                                            Nước Suối
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Customer">
+                                            Lịch sử mua hàng
                                         </a>
                                     </li>
-                                    <li>
-                                        <a style="padding:4px 0px 4px 40px;" asp-action="ShowRuou" asp-controller="Home">
-                                            Rượu Ngoại
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a style="padding:4px 0px 4px 40px;" asp-action="ShowBia" asp-controller="Home">
-                                            Bia
-                                        </a>
-                                    </li>
-
+                                 
 
 
 

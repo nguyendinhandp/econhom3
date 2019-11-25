@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ecoNhom3.Models.HangHoa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gio hang";
 }
 @{
     Layout = "_Admin";
@@ -51,7 +51,7 @@
                 <td>
                     <a asp-controller="HangHoas" asp-action="Edit" asp-route-id="@item.MaHh" class="w3-pale-yellow w3-button">Sửa</a> |
 
-                    <a asp-controller="HangHoas" asp-action="Delete" asp-route-id="@item.MaHh" class="w3-pale-red w3-button">Xóa</a>
+                    <a  asp-controller="HangHoas" asp-action="DeleteHangHoa" asp-route-id="@item.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');"  class="w3-pale-red w3-button">Xóa</a>
                 </td>
             </tr>
             }

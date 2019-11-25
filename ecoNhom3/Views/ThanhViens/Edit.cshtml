@@ -1,9 +1,16 @@
 ﻿@model ecoNhom3.Models.ThanhVien
+@using Microsoft.AspNetCore.Http
+
 @{
     ViewData["Title"] = "Edit";
-}
-@{
-    Layout = "_Admin";
+    if (Context.Session.GetInt32("LoaiTv") == 1)
+    {
+        Layout = "_Admin";
+    }
+    else
+    {
+        Layout = "_Customer";
+    }
 }
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -52,7 +59,7 @@
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-               
+
                 <div class="form-group">
                     Loại Người dùng
                     <select asp-for="LoaiTv" class="form-control" asp-items="ViewBag.LoaiTv"></select>
@@ -63,7 +70,7 @@
                     <input asp-for="TaiKhoan" class="form-control" />
                     <span asp-validation-for="TaiKhoan" class="text-danger"></span>
                 </div>
-                
+
                 <div class="form-group">
                     <input type="submit" value="Lưu" class="w3-bar-item w3-padding w3-pale-red" />
                     <a asp-action="Index" class="w3-bar-item w3-padding w3-pale-blue w3-button">Trở Về</a>

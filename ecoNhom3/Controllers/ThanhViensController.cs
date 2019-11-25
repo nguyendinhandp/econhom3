@@ -54,16 +54,23 @@ namespace ecoNhom3.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult<ThanhVien>> Create([Bind("MaTv,TenTv,GioiTinh,NgaySinh,DiaChi,DienThoai,Email,LoaiTv,TaiKhoan,MatKhau")] ThanhVien thanhVien)
         {
-            _context.ThanhViens.Add(thanhVien);
-            await _context.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                thanhVien.LoaiTv = 3;
+                _context.Add(thanhVien);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Login), "ThanhViens");
+            }
+           
             ViewData["LoaiTv"] = new SelectList(_context.PhanLoaiTVs, "LoaiTv", "LoaiTv", thanhVien.LoaiTv);
-            return CreatedAtAction("GetThanhVien", new { id = thanhVien.MaTv }, thanhVien);
+            return View(thanhVien);
         }
 
      
-        [HttpDelete("{id}")]
+        [HttpGet]
         public async Task<ActionResult<ThanhVien>> Delete(int id)
         {
             var thanhVien = await _context.ThanhViens.FindAsync(id);
@@ -74,8 +81,7 @@ namespace ecoNhom3.Controllers
 
             _context.ThanhViens.Remove(thanhVien);
             await _context.SaveChangesAsync();
-
-            return thanhVien;
+            return RedirectToAction("index", "ThanhViens");
         }
 
         private bool ThanhVienExists(int id)
@@ -85,28 +91,7 @@ namespace ecoNhom3.Controllers
 
        
         
-        public IActionResult Dangky()
-        {
-            ViewData["LoaiTv"] = new SelectList(_context.PhanLoaiTVs, "LoaiTv", "LoaiTv");
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Dangky([Bind("MaTv,TenTv,GioiTinh,NgaySinh,DiaChi,LoaiTv,DienThoai,Email,TaiKhoan,MatKhau")] ThanhVien thanhVien)
-        {
-            if (ModelState.IsValid)
-            {
-                thanhVien.MaTv = 3;
-               
-                _context.Add(thanhVien);
-                HttpContext.Session.Set<int>("a", 2);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), "Home");
-            }
-           
-            ViewData["LoaiTv"] = new SelectList(_context.PhanLoaiTVs, "LoaiTv", "LoaiTv", thanhVien.LoaiTv);
-            return View(thanhVien);
-        }
+             
 
 
         [HttpGet]

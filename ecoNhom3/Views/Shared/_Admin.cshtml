@@ -1,71 +1,301 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Session;
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin</title>
+    <title>@ViewData["Title"] - Admin</title>
+
+    <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
     <link rel="shortcut icon" type="image/ico" href="~/images/logo.jpg" />
     <link rel="icon" type="image/ico" href="~/images/logo.jpg" />
     <link rel="apple-touch-icon" type="image/ico" href="~/images/logo.jpg" />
-    <meta charset="UTF-8">
+
+    <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
+    <!-- font-awesome icons -->
+    <link href="~/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="~/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/js/move-top.js"></script>
+    <script type="text/javascript" src="~/js/easing.js"></script>
+    @section Scripts {
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+                });
+            });</script>
+    }
+    <!-- start-smoth-scrolling -->
 
-        html, body, h1, h2, h3, h4, h5 {
-            font-family: "Raleway", sans-serif
-        }
-    </style>
 </head>
-<body class="w3-light-grey">
-    <!-- Top container -->
-    <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
-         <a asp-action="Index" asp-controller="Home"> Go to ecoNhom3 Drinks </a>
-    </div>
-   
-    <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
-        <br>
-        <div class="w3-container w3-row">
-            <div class="w3-col s4">
-                <img src="~/images/admin.png" class="w3-circle w3-margin-right" style="width:46px">
+<body>
+    <div class="container-fluid">
+        <!-- header -->
+        <div class="agileits_header">
+            <div class="w3l_offers">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tài khoản <span class="caret"></span></a>
+                @if (Context.Session.GetInt32("MaTv") == null)
+                {
+                    <ul class="dropdown-menu">
+                        <li><a asp-controller="ThanhViens" asp-action="Login">Đăng nhập</a></li>
+                    </ul>
+
+                }
+                else
+                {
+
+                    <ul class="dropdown-menu">
+                        <li><a href="~/ThanhViens/Details/@Context.Session.GetInt32("MaTv")">Thông tin tài khoản</a></li>
+
+                        <li><a asp-controller="ThanhViens" asp-action="Logout">Đăng xuất</a></li>
+                    </ul>
+                }
+
+
             </div>
-            <div class="w3-col s8 w3-bar">
-                <span style="color:crimson; font-size:20px"><strong>Admin</strong></span>
+
+            <div class="w3l_offers">
+                <a style="background-color:red;" asp-action="Index" asp-controller="Home">Trang Chủ</a>
+            </div>
+            <div class="w3l_offers">
+                <a style="background-color:blue;" asp-action="Contact" asp-controller="Home">Liên Hệ</a>
+            </div>
+
+            <div class="product_list_header">
+                <a asp-action="Index" asp-controller="Cart">
+                    <input type="submit" name="name" value="Giỏ Hàng" class="button" />
+                </a>
+            </div>
+            <div class="nav navbar-nav navbar-right" style="margin-right:10px;">
+                @using (Html.BeginForm("SearchSP", "Home"))
+                {
+                    <input style="margin-top:10px;color: black" type="text" name="keysearch" value="" placeholder="Tìm kiếm Sản Phẩm" />
+                    <input style="margin-top:10px" type="submit" name="name" value="Tìm Kiếm" />
+                }
+
+
+            </div>
+
+        </div>
+
+        <!-- script-for sticky-nav -->
+        <script>
+            $(document).ready(function () {
+                var navoffeset = $(".agileits_header").offset().top;
+                $(window).scroll(function () {
+                    var scrollpos = $(window).scrollTop();
+                    if (scrollpos >= navoffeset) {
+                        $(".agileits_header").addClass("fixed");
+                    } else {
+                        $(".agileits_header").removeClass("fixed");
+                    }
+                });
+
+            });</script>
+        <!-- //script-for sticky-nav -->
+        <div class="logo_products" style="padding: 2em 0px 0em;">
+            <div class="container">
+                <div style="text-align: center; border-bottom: solid 1px red">
+                    <a style="color:#000033;font-size:60px;font-weight:bolder;text-decoration: none; color:mediumvioletred;">econhom3 Drinks</a>
+                </div>
+
+                <div class="clearfix"> </div>
             </div>
         </div>
-        <hr>
-        <div class="w3-bar-block">
-           
-            <a asp-controller="ThanhViens" asp-action="Admin" class="w3-bar-item w3-button w3-padding w3-pale-blue"><i class="fa fa-drivers-license fa-fw"></i> THÔNG TIN ADMIN</a>
-            <a asp-controller="ThanhViens" asp-action="Customer" class="w3-bar-item w3-button w3-padding w3-pale-yellow"><i class="fa fa-group fa-fw"></i> THÔNG TIN KHÁCH HÀNG</a>
-            <a asp-controller="Loais" asp-action="Index" class="w3-bar-item w3-button w3-padding w3-pale-blue"><i class="fa fa-file-word-o fa-fw"></i>  LOẠI SẢN PHẨM</a>
-            <a asp-controller="NhaCungCaps" asp-action="Index" class="w3-bar-item w3-button w3-padding w3-pale-yellow"><i class="fa fa-flag fa-fw"></i>  NHÀ CUNG CẤP</a>
-            <a asp-controller="HangHoas" asp-action="Index" class="w3-bar-item w3-button w3-padding w3-pale-blue"><i class="fa fa-heart fa-fw"></i>  SẢN PHẨM</a>
-            <a asp-controller="HoaDons" asp-action="Index" class="w3-bar-item w3-button w3-padding w3-pale-yellow"><i class="fa fa-check-square-o fa-fw"></i>  HÓA ĐƠN</a>
-           
-            <br><br>
+
+        <!-- //header -->
+        <div class="row" style="margin-right:-29px;margin-left:-29px;">
+            <div class="col-md-3">
+                <!-- banner -->
+                <div class="banner">
+                    <div class="w3l_banner_nav_left" style="float:left;width:84%;">
+
+                        <nav class="navbar nav_bottom">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+
+                            <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                                <ul class="nav navbar-nav nav_1">
+                                    <li><a asp-controller="ThanhViens" asp-action="Details" asp-route-id="@Context.Session.GetInt32("MaTv")" style="color:#fff;background-color:brown;font-size:18px;font-weight:bold;">Admin</a></li>
+
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Admin">
+                                            Tài khoản Admin
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Customer">
+                                            Tài khoản Khách hàng
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="HangHoas" asp-action="Index">
+                                            Sản phẩm
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="NhaCungCaps" asp-action="Index">
+                                            Nhà cung cấp
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="Loais" asp-action="Index">
+                                            Loại sản phẩm
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="HoaDons" asp-action="Index">
+                                            Thống kê hóa đơn
+                                        </a>
+                                    </li>
+
+
+
+
+                                </ul>
+                            </div><!-- /.navbar-collapse -->
+                        </nav>
+                    </div>
+                    <!-- //newsletter -->
+                </div>
+            </div>
+            <article class="col-md-9">
+                @RenderBody()
+            </article>
         </div>
-    </nav>
 
-    <!-- Overlay effect when opening sidebar on small screens -->
-    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
-        @RenderBody()
-        <!-- Footer -->
-        <footer class="w3-container w3-padding-16 w3-light-grey">
-            <p>@DateTime.Now</p>
+
+
+        <!-- //fresh-vegetables -->
+        <!-- footer -->
+        <footer class="row">
+            <div class="footer">
+                <div class="container">
+                    <div class="col-md-3 w3_footer_grid">
+                       
+                        <h3>Thông tin cửa hàng</h3>
+                        <ul class="w3_footer_grid_list">
+                            <li><a  asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Các mặt hàng</h3>
+                        <ul class="w3_footer_grid_list">
+                            <li><a asp-action="ShowNuocNgot" asp-controller="Home">Nước Ngọt</a></li>
+                            <li><a asp-action="ShowNuocSuoi" asp-controller="Home">Nước Suối</a></li>
+                            <li><a asp-action="ShowRuou" asp-controller="Home">Rượu</a></li>
+                            <li><a asp-action="ShowBia" asp-controller="Home">Bia</a></li>
+
+                        </ul>
+                    </div>
+                   
+                    
+                    <div class="agile_footer_grids">
+                        <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                            <div class="w3_footer_grid_bottom">
+                                <h4>100% secure payments</h4>
+                                <img src="~/images/card.png" alt=" " class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                            <div class="w3_footer_grid_bottom">
+                                <h5>connect with us</h5>
+                                <ul class="agileits_social_icons">
+                                    <li><a href="https://www.facebook.com/EcommerceNhom3-100776611402531/" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="wthree_footer_copy">
+                        <p>&copy;  ecoNhom3</p>
+                    </div>
+                </div>
+            </div>
         </footer>
-        <!-- End page content -->
     </div>
-    
+    <!-- //footer -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });</script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });</script>
+    <!-- //here ends scrolling icon -->
+    <script src="~/js/minicart.js"></script>
+    <script>
+        paypal.minicart.render();
+
+        paypal.minicart.cart.on('checkout', function (evt) {
+            var items = this.items(),
+                len = items.length,
+                total = 0,
+                i;
+
+            // Count the number of each item in the cart
+            for (i = 0; i < len; i++) {
+                total += items[i].get('quantity');
+            }
+
+            if (total < 3) {
+                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+                evt.preventDefault();
+            }
+        });</script>
+
+    <!--Facebook-->
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=345381992927311&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

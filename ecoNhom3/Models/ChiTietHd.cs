@@ -12,9 +12,7 @@ namespace ecoNhom3.Models
         [Key]
         public int MaCTHD { get; set; }
     
-        public int MaHd { get; set; }
-        [ForeignKey("Mahd")]
-        public HoaDon HoaDon { get; set; }
+        
     
         public int MaHh { get; set; }
         [ForeignKey("MaHh")]

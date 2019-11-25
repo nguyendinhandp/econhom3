@@ -34,12 +34,15 @@
                         @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group regis">
+                                               
                         <input type="submit" name="name" value="Đăng nhập" class="btn btn-primary regis" />
                     </div>
                 }
-                <div class="form-group regis">
-                    <a asp-action="Index" asp-controller="Home">Quay về trang chủ</a>
-                </div>
+                    <div class="form-group regis">
+                        <a asp-controller="ThanhViens" asp-action="Create">Đăng ký tài khoản -</a> 
+
+                        <a asp-action="Index" asp-controller="Home">- Quay về trang chủ</a>
+                    </div>
                
 
             </div>

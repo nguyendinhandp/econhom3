@@ -1,6 +1,15 @@
 ﻿@model ecoNhom3.Models.ThanhVien
+@using Microsoft.AspNetCore.Http
 @{
-    ViewData["Title"] = "suathongtinkh";
+    ViewData["Title"] = "Thong tin tai khoan";
+    @if (Context.Session.GetInt32("LoaiTv") == 1)
+    {
+        Layout = "_Admin";
+    }
+    else
+    {
+        Layout = "_Customer";
+    }
 }
 <meta name="viewport" content="width=device-width" />
 <meta charset="utf-8" />
@@ -50,7 +59,7 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
                 <input type="hidden" value="@Model.MaTv" name="lngd" />
             </div>

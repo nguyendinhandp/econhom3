@@ -43,7 +43,7 @@ namespace ecoNhom3
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(ChuoiKetNoi));
             services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache();
-
+            services.AddRouting();
             services.AddSession(option =>
             {
                 option.IdleTimeout = TimeSpan.FromMinutes(10);
@@ -76,16 +76,13 @@ namespace ecoNhom3
           
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-
-                   name: "ChiTiet",
-                   template: "{title}/{id}",
-                   defaults: new { controller = "News", action = "Detail" });
-
+             
                 routes.MapRoute(
                     
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+               
+               
 
             });
             
