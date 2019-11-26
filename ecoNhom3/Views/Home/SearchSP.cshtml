@@ -11,7 +11,7 @@
 
 
     <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
-       
+
         @{
             foreach (var item in Model)
             {
@@ -26,13 +26,13 @@
                         <span class="thongtinsanpham">
                             <h4 class="tensanpham">@item.TenHh</h4>
                             <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
-                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@item.DonGia .000 đ / SP</div>
+                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia) / SP</div>
                             @{
                                 double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
                                 item.DonGia = b;
                             }
                             <div style="float:left;">
-                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @item.DonGia .000 đ</span>
+                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia) / SP</span>
                             </div>
 
                         </span>
@@ -40,7 +40,7 @@
                             @item.TenHh
                         </p>
                         <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                            @item.DonGia .000 đ / SP
+                            @String.Format("{0:0,0 đ}", item.DonGia) / SP
                         </p>
                     </a>
 
@@ -50,3 +50,4 @@
     </div>
     <div class="clearfix"> </div>
 </div>
+

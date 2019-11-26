@@ -180,36 +180,7 @@ namespace ecoNhom3.Controllers
             }));
         }
 
-        public IActionResult SearchAdmin(string keyword = "")
-        {
-            if (keyword != null)
-            {
-                keyword = keyword.ToLower();
-                var data = _context.ThanhViens.Include(n => n.PhanLoaiTV).Where(p => p.TenTv.ToLower().Contains(keyword))
-                    .ToList();
-
-                return PartialView(data);
-            }
-            else
-            {
-                return PartialView();
-            }
-        }
-        public IActionResult SearchUser(string keyword = "")
-        {
-            if (keyword != null)
-            {
-                keyword = keyword.ToLower();
-                var data = _context.ThanhViens.Include(n => n.PhanLoaiTV).Where(p => p.TenTv.ToLower().Contains(keyword))
-                    .ToList();
-
-                return PartialView(data);
-            }
-            else
-            {
-                return PartialView();
-            }
-        }
+   
 
         public IActionResult Login()
         {
@@ -223,6 +194,7 @@ namespace ecoNhom3.Controllers
                                   where ThanhVien.TaiKhoan == Model.TaiKhoan && ThanhVien.MatKhau == Model.MatKhau
                                   select new Login
                                   {
+                                      TenTv = ThanhVien.TenTv,
                                       MaTv = ThanhVien.MaTv,
                                       TaiKhoan = ThanhVien.TaiKhoan,
                                       MatKhau = ThanhVien.MatKhau,
@@ -239,6 +211,7 @@ namespace ecoNhom3.Controllers
                 HttpContext.Session.SetString("TaiKhoan", tv.TaiKhoan);
                 HttpContext.Session.SetString("MatKhau", tv.MatKhau);
                 HttpContext.Session.SetInt32("LoaiTv", tv.LoaiTv);
+                HttpContext.Session.SetString("TenTv", tv.TenTv);
             }
             return RedirectToAction("Details", "ThanhViens", new { id = tv.MaTv });
 
@@ -251,6 +224,7 @@ namespace ecoNhom3.Controllers
             HttpContext.Session.Remove("TaiKhoan");
             HttpContext.Session.Remove("MatKhau");
             HttpContext.Session.Remove("LoaiTv");
+            HttpContext.Session.Remove("TenTv");
             return RedirectToAction("Index", "Home");
         }
 

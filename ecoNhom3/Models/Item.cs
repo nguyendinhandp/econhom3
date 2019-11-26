@@ -12,6 +12,8 @@ namespace ecoNhom3.Models
         public HangHoa HangHoa { get; set; }
         
         public int Quantity { get; set; }
+        
+ 
 
     }
 }

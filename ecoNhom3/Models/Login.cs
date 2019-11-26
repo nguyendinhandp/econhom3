@@ -25,8 +25,11 @@ namespace ecoNhom3.Models
         [MaxLength(50, ErrorMessage = "Tối đa 50 ký tự")]
         [DataType(DataType.Password)]
         public string MatKhau { set; get; }
+        public string TenTv { set; get; }
 
-        
+  
+
+
 
     }
 }

@@ -77,12 +77,12 @@ namespace ecoNhom3.Controllers
         
         public IActionResult Edit(int id)
         {
-            HangHoa tv = _context.HangHoas.Where(p => p.MaHh == id).First();
+            HangHoa hh = _context.HangHoas.Where(p => p.MaHh == id).First();
 
-            ViewData["MaLoai"] = new SelectList(_context.Loais, "MaLoai", "MaLoai", tv.MaLoai);
-            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "MaNcc", tv.MaNcc);
+            ViewData["MaLoai"] = new SelectList(_context.Loais, "MaLoai", "MaLoai", hh.MaLoai);
+            ViewData["MaNcc"] = new SelectList(_context.NhaCungCaps, "MaNcc", "MaNcc", hh.MaNcc);
 
-            return View(tv);
+            return View(hh);
         }
 
 
@@ -189,153 +189,7 @@ namespace ecoNhom3.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Mua(int mahh, int soluong, int id)
-        {
-
-            //if (mahh != 0)
-            //{
-            //    HangHoa hh = new HangHoa();
-            //    hh = _context.HangHoas.Where(p => p.MaHh == mahh).First();
-            //    if (HttpContext.Session.Get<int>("xacnhanmuaxong") != 1)
-            //    {
-
-            //        if (HttpContext.Session.Get<ThanhVien>("MaTv") == null)
-            //        {
-            //            HttpContext.Session.Set<int>("a", 3);
-            //            return RedirectToAction("index", "Home");
-            //        }
-            //        else
-            //        {
-            //            ThanhVien tv = HttpContext.Session.Get<ThanhVien>("MaTv");
-            //            HoaDon hd = new HoaDon();
-            //            hd.MaTv = tv.MaTv;
-            //            DateTime d = DateTime.Now;
-
-            //            hd.NgayDat = d;
-            //            hd.NgayGiao = d;
-
-            //            hd.HoTen = tv.TenTv;
-            //            hd.DiaChi = tv.DiaChi;
-            //            hd.PhiShip = 0;
-            //            hd.MaTrangThai = 1;
-            //            hd.GhiChu = tv.DiaChi;
-            //            _context.HoaDons.Add(hd);
-            //            _context.SaveChanges();
-            //            HttpContext.Session.Set("MaHd", hd.MaHd);
-            //            ChiTietHd cthd = new ChiTietHd();
-
-                       
-            //            cthd.MaHh = mahh;
-            //            cthd.DonGia = hh.DonGia;
-            //            cthd.SoLuong = soluong;
-
-            //            cthd.GiamGia = hh.GiamGia;
-
-            //            _context.ChiTietHds.Add(cthd);
-            //            _context.SaveChanges();
-            //            HttpContext.Session.Set("xacnhanmuaxong", 1);
-            //        }
-            //    }
-            //    else
-            //    {
-
-            //       // ChiTietHd cthd = new ChiTietHd();
-
-            //     //   cthd.MaHd = HttpContext.Session.Get<int>("MaHd");
-
-            //      //  cthd.MaHh = mahh;
-            //     //   cthd.DonGia = hh.DonGia;
-            //   //     cthd.SoLuong = soluong;
-
-            //   //     cthd.GiamGia = hh.GiamGia;
-
-            //    //    _context.ChiTietHds.Add(cthd);
-            //    //    _context.SaveChanges();
-            //    //    HttpContext.Session.Set("xacnhanmuaxong", 1);
-
-            //    }
-            //}
-            //else
-            //{
-            //    var ct = _context.ChiTietHds.Find(id);
-            //    _context.ChiTietHds.Remove(ct);
-            //    _context.SaveChanges();
-            //}
-
-
-            //List<ChiTietHd> dscts = new List<ChiTietHd>();
-            
-            //double tongtien = 0;
-            //foreach (var item in dscts)
-            //{
-            //    tongtien += item.ThanhTien;
-            //}
-            //ViewBag.TongTien = tongtien;
-         //   return View(dscts);
-            return View();
-
-
-
-
-        }
-        public IActionResult LapHoaDon()
-        {
-            ThanhToanView model = new ThanhToanView();
-            HoaDon hd = new HoaDon();
-            hd = _context.HoaDons.Where(p => p.MaHd == HttpContext.Session.Get<int>("MaHd")).First();
-            ThanhVien tv = new ThanhVien();
-            tv = _context.ThanhViens.Where(p => p.MaTv == hd.MaTv).First();
-
-            Thongtinkh tt = new Thongtinkh();
-           
-            tt.TENKH = tv.TenTv;
-            tt.SDT = tv.DienThoai;
-           
-            tt.DCNHAN = tv.DiaChi;
-         
-            tt.PHISHIP = hd.PhiShip;
-            model.thongtinKH = tt;
-            List<ChiTietHd> dscts = new List<ChiTietHd>();
-           
-            model.Cthd = dscts;
-            double tongtien = 0;
-            foreach (var item in dscts)
-            {
-                tongtien += item.ThanhTien;
-            }
-            ViewBag.TongTien = tongtien;
-           
-            return View(model);
-        }
-
-        public IActionResult Hoanttatdonhang(int tt, int vc)
-        {
-            HoaDon hd = _context.HoaDons.Where(p => p.MaHd == HttpContext.Session.Get<int>("MaHd")).First();
-            hd.MaTrangThai = 3;
-           
-            _context.HoaDons.Update(hd);
-            _context.SaveChanges();
-
-            List<ChiTietHd> cts = new List<ChiTietHd>();
-           // cts = _context.ChiTietHds.Where(p => p.MaHd == hd.MaHd).ToList();
-           
-
-            return RedirectToAction("index", "Home");
-        }
-        public IActionResult ViewGioHang()
-        {
-            List<ChiTietHd> dscts = new List<ChiTietHd>();
-        //    dscts = _context.ChiTietHds.Include(x => x.HangHoa).Where(p => p.MaHd == HttpContext.Session.Get<int>("MaHd")).ToList();
-            double tongtien = 0;
-            foreach (var item in dscts)
-            {
-                tongtien += item.ThanhTien;
-            }
-            ViewBag.TongTien = tongtien;
-            return View(dscts);
-        }
-     
+    
 
 
     }

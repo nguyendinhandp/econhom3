@@ -18,7 +18,7 @@ namespace ecoNhom3.Models
       
         public DateTime NgayDat { get; set; }
     
-        public DateTime? NgayGiao { get; set; }
+        public DateTime NgayGiao { get; set; }
     
         public string HoTen { get; set; }
   
@@ -30,14 +30,13 @@ namespace ecoNhom3.Models
      
         public double PhiShip { get; set; }
        
-        public int MaTrangThai { get; set; }
-        [ForeignKey ("MaTrangThai")]
+        public int MaTt { get; set; }
+        [ForeignKey ("MaTt")]
         public TrangThai TrangThai { get; set; }
-
-        public int MaCthd { get; set; }
-        [ForeignKey("MaCTHD")]
+ 
         public ChiTietHd ChiTietHd { get; set; }
-        public double TongTienHang => ChiTietHd.ThanhTien;
+
+        public double TongTienHang;
  
      
     }

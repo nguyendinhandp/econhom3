@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ecoNhom3.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ecoNhom3.Models;
+using Microsoft.AspNetCore.Session;
+
 
 namespace ecoNhom3.Controllers
-{ 
-
+{
     public class ChiTietHdsController : Controller
     {
         private readonly MyDbContext _context;
@@ -19,28 +20,20 @@ namespace ecoNhom3.Controllers
         {
             _context = context;
         }
-
-        
-        public IActionResult Index()
+        // GET: ChiTietHds
+        public ActionResult Index()
         {
             return View();
         }
 
-        public async Task<ActionResult<ChiTietHd>> Details(int id)
+        // GET: ChiTietHds/Details/5
+        public ActionResult Details(int id)
         {
-            var chiTietHd = await _context.ChiTietHds
-               .Include(c => c.HangHoa)               
-               .FirstOrDefaultAsync(m => m.MaCTHD == id);
-
-            if (chiTietHd == null)
-            {
-                return NotFound();
-            }
-
-            return View(chiTietHd);
+            return View();
         }
+
         // GET: ChiTietHds/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
             ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh");
             ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd");
@@ -50,6 +43,7 @@ namespace ecoNhom3.Controllers
         // POST: ChiTietHds/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+    
         public async Task<IActionResult> Create([Bind("MaCTHD,MaHd,MaHh,DonGia,SoLuong,GiamGia")] ChiTietHd chiTietHd)
         {
             if (ModelState.IsValid)
@@ -59,96 +53,67 @@ namespace ecoNhom3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", chiTietHd.MaHh);
-           
+            ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd", chiTietHd.MaHd);
+
             return View(chiTietHd);
         }
         // GET: ChiTietHds/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            ChiTietHd ct = _context.ChiTietHds.Where(p => p.MaCTHD == id).First();
+            ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", ct.MaHh);
+            ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd", ct.MaHd);
 
-            var chiTietHd = await _context.ChiTietHds.FindAsync(id);
-            if (chiTietHd == null)
-            {
-                return NotFound();
-            }
-            ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", chiTietHd.MaHh);
-        
-            return View(chiTietHd);
+            return View(ct);
         }
 
-
-        // PUT: api/ChiTietHds/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, ChiTietHd chiTietHd)
+        // POST: ChiTietHds/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("MaCTHD,MaHd,MaHh,DonGia,SoLuong,GiamGia")] ChiTietHd chiTietHd)
         {
             if (id != chiTietHd.MaCTHD)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(chiTietHd).State = EntityState.Modified;
-
-            try
+            if (ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ChiTietHdExists(id))
+                try
                 {
-                    return NotFound();
+                    _context.Update(chiTietHd);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!HoaDonExists(chiTietHd.MaHd))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
             ViewData["MaHh"] = new SelectList(_context.HangHoas, "MaHh", "MaHh", chiTietHd.MaHh);
-        
-            return View(chiTietHd);
-        }
-
-      
-        [HttpPost]
-        public async Task<ActionResult<ChiTietHd>> PostChiTietHd(ChiTietHd chiTietHd)
-        {
-            _context.ChiTietHds.Add(chiTietHd);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetChiTietHd", new { id = chiTietHd.MaCTHD }, chiTietHd);
-        }
-      
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var chiTietHd = await _context.ChiTietHds
-                .Include(c => c.HangHoa)
-                
-                .FirstOrDefaultAsync(m => m.MaCTHD == id);
-            if (chiTietHd == null)
-            {
-                return NotFound();
-            }
+            ViewData["MaHd"] = new SelectList(_context.HoaDons, "MaHd", "MaHd", chiTietHd.MaHd);
 
             return View(chiTietHd);
         }
 
-       
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ChiTietHd>> DeleteChiTietHd(int id)
+        private bool HoaDonExists(int id)
+        {
+            return _context.ChiTietHds.Any(e => e.MaCTHD == id);
+        }
+
+        public async Task<ActionResult<ChiTietHd>> Delete(int id)
         {
             var chiTietHd = await _context.ChiTietHds.FindAsync(id);
             if (chiTietHd == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
             _context.ChiTietHds.Remove(chiTietHd);
@@ -157,9 +122,5 @@ namespace ecoNhom3.Controllers
             return chiTietHd;
         }
 
-        private bool ChiTietHdExists(int id)
-        {
-            return _context.ChiTietHds.Any(e => e.MaCTHD == id);
-        }
     }
 }

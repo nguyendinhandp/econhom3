@@ -1,4 +1,6 @@
 ﻿@model ecoNhom3.Models.HoaDon
+@using Microsoft.AspNetCore.Http;
+
 @{
     ViewData["Title"] = "Create";
 }
@@ -9,45 +11,50 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="MaTv" class="control-label"></label>
-                <select asp-for="MaTv" class="form-control" asp-items="ViewBag.MaTv"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayDat" class="control-label"></label>
-                <input asp-for="NgayDat" class="form-control" />
-                <span asp-validation-for="NgayDat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayGiao" class="control-label"></label>
-                <input asp-for="NgayGiao" class="form-control" />
-                <span asp-validation-for="NgayGiao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HoTen" class="control-label"></label>
-                <input asp-for="HoTen" class="form-control" />
+                Họ Tên:
+                <input asp-for="HoTen" class="form-control" value="@Context.Session.GetString("TenTv")" />
                 <span asp-validation-for="HoTen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DiaChi" class="control-label"></label>
+                Địa Chỉ:
                 <input asp-for="DiaChi" class="form-control" />
                 <span asp-validation-for="DiaChi" class="text-danger"></span>
             </div>
-            
             <div class="form-group">
-                <label asp-for="PhiShip" class="control-label"></label>
-                <input asp-for="PhiShip" class="form-control" />
-                <span asp-validation-for="PhiShip" class="text-danger"></span>
+                Điện Thoại:
+                <input asp-for="SdtNguoiNhan" class="form-control" />
+                <span asp-validation-for="SdtNguoiNhan" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaTrangThai" class="control-label"></label>
-                <select asp-for="MaTrangThai" class="form-control" asp-items="ViewBag.MaTrangThai"></select>
+                Địa Chỉ:
+                <input asp-for="DiaChi" class="form-control" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GhiChu" class="control-label"></label>
+                Ghi chú:
                 <input asp-for="GhiChu" class="form-control" />
                 <span asp-validation-for="GhiChu" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                Tổng Hóa Đơn:
+
+                <input asp-for="TongTienHang" class="form-control" readonly value="@tt" />
+                <span asp-validation-for="TongTienHang" class="text-danger"></span>
+
+
+            </div>
+            <div class="form-group">
+                Phí Ship (Tính riêng):
+                <input  class="form-control" readonly value="20.000 đ" />
+                
+
+            </div>
+
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

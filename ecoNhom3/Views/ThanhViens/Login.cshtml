@@ -1,5 +1,6 @@
 ﻿@model ecoNhom3.Models.Login
 @using Microsoft.AspNetCore.Http
+
 @{
     ViewData["Title"] = "Login";
     Layout = null;
@@ -34,16 +35,16 @@
                         @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group regis">
-                                               
+
                         <input type="submit" name="name" value="Đăng nhập" class="btn btn-primary regis" />
                     </div>
                 }
-                    <div class="form-group regis">
-                        <a asp-controller="ThanhViens" asp-action="Create">Đăng ký tài khoản -</a> 
+                <div class="form-group regis">
+                    <a asp-controller="ThanhViens" asp-action="Create">Đăng ký tài khoản -</a>
 
-                        <a asp-action="Index" asp-controller="Home">- Quay về trang chủ</a>
-                    </div>
-               
+                    <a asp-action="Index" asp-controller="Home">- Quay về trang chủ</a>
+                </div>
+
 
             </div>
         </div>

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ecoNhom3.Models;
 using Microsoft.AspNetCore.Session;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace ecoNhom3.Controllers
 {
@@ -32,8 +32,8 @@ namespace ecoNhom3.Controllers
             {
                 var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
                 ViewBag.cart = cart;
-
                 ViewBag.total = cart.Sum(item => item.HangHoa.Price * item.Quantity);
+              
             }
                 
             return View();
@@ -60,6 +60,7 @@ namespace ecoNhom3.Controllers
                 else
                 {
                     cart[index].Quantity += sl;
+                   
                 }
                 Models.SessionExtensions.Set(HttpContext.Session, "cart", cart);
             }
@@ -182,6 +183,55 @@ namespace ecoNhom3.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult ThanhToan(int mahh, int soluong, int id)
+        {
+            if (mahh != null)
+            {
+                HangHoa hh = new HangHoa();
+                hh = _context.HangHoas.Where(p => p.MaHh == mahh).First();
+                
+                    
+
+                    ChiTietHd cthd = new ChiTietHd();
+
+                       cthd.MaHd = HttpContext.Session.Get<int>("MaHd");
+
+                         cthd.MaHh = mahh;
+                         cthd.DonGia = hh.DonGia;
+                         cthd.SoLuong = soluong;
+
+                         cthd.GiamGia = hh.GiamGia;
+
+                        _context.ChiTietHds.Add(cthd);
+                        _context.SaveChanges();
+                      
+
+                
+            }
+            else
+            {
+                var ct = _context.ChiTietHds.Find(id);
+                _context.ChiTietHds.Remove(ct);
+                _context.SaveChanges();
+            }
+
+
+            List<ChiTietHd> dscts = new List<ChiTietHd>();
+
+            double tongtien = 0;
+            foreach (var item in dscts)
+            {
+                tongtien += item.ThanhTien;
+            }
+            ViewBag.TongTien = tongtien;
+            return View(dscts);
+           
+
+
+
+
         }
     }
 }

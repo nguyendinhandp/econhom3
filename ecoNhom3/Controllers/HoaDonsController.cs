@@ -4,13 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ecoNhom3.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ecoNhom3.Models;
+using Microsoft.AspNetCore.Session;
+using System.IO;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ecoNhom3.Controllers
 {
-   
     public class HoaDonsController : Controller
     {
         private readonly MyDbContext _context;
@@ -20,52 +23,74 @@ namespace ecoNhom3.Controllers
             _context = context;
         }
 
-       
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<HoaDon>>> Index()
+        // GET: HoaDons
+        public ActionResult Index()
         {
-            var myDbContext = _context.HoaDons.Include(h => h.ThanhVien).Include(h => h.TrangThai);
-            return await _context.HoaDons.ToListAsync();
+            
+      
+
+            return View();
         }
 
-        // GET: api/HoaDons/5
-       
-        public async Task<ActionResult<HoaDon>> Details(int id)
+        // GET: HoaDons/Details/5
+        public ActionResult Details(int id)
         {
-            var hoaDon = await _context.HoaDons
-               .Include(h => h.ThanhVien)
-               .Include(h => h.TrangThai)
-               .FirstOrDefaultAsync(m => m.MaHd == id);
+            return View();
+        }
 
-            if (hoaDon == null)
-            {
-                return NotFound();
-            }
+        // GET: HoaDons/Create
+        public ActionResult Create()
+        {
+            
+            ViewData["MaTv"] = new SelectList(_context.ThanhViens, "MaTv", "MaTv");
+            ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt");
 
-            return View(hoaDon);
+            return View();
         }
 
         // POST: HoaDons/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu")] HoaDon hoaDon)
+        public async Task<ActionResult<HoaDon>> Create([Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu")] HoaDon hoaDon)
         {
+            var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
             if (ModelState.IsValid)
             {
+                
+                DateTime d = DateTime.Now;
+                
+                hoaDon.NgayDat = d;
+                hoaDon.NgayGiao = d;
+                hoaDon.PhiShip = 20000;
+                hoaDon.MaTt = '1';
+              
                 _context.Add(hoaDon);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["MaTv"] = new SelectList(_context.ThanhViens, "MaTv", "MaTv", hoaDon.MaTv);
+
+            ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt", hoaDon.MaTt);
+
           
-            ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt", hoaDon.MaTrangThai);
-           
             return View(hoaDon);
         }
-        // PUT: api/HoaDons/5
+
+        // GET: HoaDons/Edit/5
+        public ActionResult Edit(int id)
+        {
+            HoaDon hd = _context.HoaDons.Where(p => p.MaHd == id).First();
+            ViewData["MaTv"] = new SelectList(_context.ThanhViens, "MaTv", "MaTv", hd.MaTv);
+            ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt", hd.MaTt);
+                      
+            return View(hd);
+        }
+
+        // POST: HoaDons/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu")] HoaDon hoaDon)
+        public async Task<IActionResult> Edit (int id, [Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu")] HoaDon hoaDon)
         {
             if (id != hoaDon.MaHd)
             {
@@ -93,26 +118,22 @@ namespace ecoNhom3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaTv"] = new SelectList(_context.ThanhViens, "MaTv", "MaTv", hoaDon.MaTv);
-        
-            ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt", hoaDon.MaTrangThai);
-     
+
+            ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt", hoaDon.MaTt);
+
             return View(hoaDon);
         }
-        // POST: api/HoaDons
-        [HttpPost]
-        public async Task<ActionResult<HoaDon>> PostHoaDon(HoaDon hoaDon)
-        {
-            _context.HoaDons.Add(hoaDon);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHoaDon", new { id = hoaDon.MaHd }, hoaDon);
+        private bool HoaDonExists(int id)
+        {
+            return _context.HoaDons.Any(e => e.MaHd == id);
         }
 
-        // DELETE: api/HoaDons/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<HoaDon>> DeleteHoaDon(int id)
+
+       
+        public async Task<ActionResult<HoaDon>> Delete(int id)
         {
-            var hoaDon = await _context.HoaDons.FindAsync(id);
+            var hoaDon = await _context.HoaDons.FindAsync(id); 
             if (hoaDon == null)
             {
                 return NotFound();
@@ -124,62 +145,5 @@ namespace ecoNhom3.Controllers
             return hoaDon;
         }
 
-        private bool HoaDonExists(int id)
-        {
-            return _context.HoaDons.Any(e => e.MaHd == id);
-        }
-
-
-        public IActionResult chitietdonhang(int? id)
-        {
-            HoaDonView model = new HoaDonView();
-            List<ChiTietHd> ct = new List<ChiTietHd>();
-            if (id.HasValue)
-            {
-
-                HoaDon hd = _context.HoaDons.Include(x => x.ThanhVien).Include(x => x.TrangThai).Where(p => p.MaHd == id).First();
-              //  ct = _context.ChiTietHds.Include(x => x.HangHoa).Where(p => p.MaHd == hd.MaHd).ToList();
-                model.hd = hd;
-                model.chitiethd = ct;
-            }
-            double tongtien = 0;
-            foreach (var item in ct)
-            {
-                tongtien += item.ThanhTien;
-            }
-            ViewBag.TongTien = tongtien;
-            return View(model);
-        }
-        public IActionResult Search(int? keyword)
-        {
-            if (keyword != null)
-            {
-
-                var data = _context.HoaDons.Include(h => h.ThanhVien).Include(h => h.TrangThai).Where(p => p.MaHd == keyword)
-                    .ToList();
-
-                return PartialView(data);
-            }
-            else
-            {
-                return PartialView();
-            }
-        }
-        public IActionResult giamtrth(int id)
-        {
-            HoaDon hd = _context.HoaDons.Where(p => p.MaHd == id).First();
-            --hd.MaTrangThai;
-            _context.HoaDons.Update(hd);
-            _context.SaveChanges();
-            return RedirectToAction("index", "HoaDons");
-        }
-        public IActionResult tangtrth(int id)
-        {
-            HoaDon hd = _context.HoaDons.Where(p => p.MaHd == id).First();
-            ++hd.MaTrangThai;
-            _context.HoaDons.Update(hd);
-            _context.SaveChanges();
-            return RedirectToAction("index", "HoaDons");
-        }
     }
 }

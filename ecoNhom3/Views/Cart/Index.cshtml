@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http;
+@model ecoNhom3.Models.Item
 @{
     ViewData["Title"] = "Cart";
 }
@@ -42,16 +43,27 @@
                     <td></td>
                     <td></td>
                     <td class="text-right">Tổng thành tiền:</td>
-                    <td>@String.Format("{0:0,0 đ}", (ViewBag.total)) </td>
+                    <td>@String.Format("{0:0,0 đ}", ViewBag.total) </td>
+                    @{ double tt = ViewBag.total;}
                 </tr>
+
             </table>
+           
             @if (Context.Session.GetInt32("MaTv") == null)
             {
-                <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Vui lòng đăng nhập để thanh toán!');" > Thanh Toán </a>
+                <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Vui lòng đăng nhập để thanh toán!');"> Lập Đơn Hàng </a>
             }
             else
             {
-                <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " asp-controller="ChiTietHds" asp-action="Index"> Thanh Toán </a>
+                if (ViewBag.total == 0)
+                {
+                    <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Giỏ hàng của bạn đang trống, Vui lòng mua hàng!!! ');"> Lập Đơn Hàng </a>
+                }
+                else
+                {
+                    <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " asp-controller="HoaDons" asp-action="Create"> Lập Đơn Hàng </a>
+                }
+
             }
 
         </div>
