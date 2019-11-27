@@ -25,7 +25,7 @@
                 {
                     <tr>
                         <td class="text-center"><img src="~/images/@item.Hinh" width="70" height="60" /> </td>
-                        <td><a asp-action="chitiet" asp-controller="HangHoas" asp-route-id="@item.MaHh"> @item.TenHh </a> </td>
+                        <td><a asp-action="chitiet" asp-controller="HangHoas" asp-route-id="@item.Url"> @item.TenHh </a> </td>
 
                         <td width="80px">
                             <form asp-action="Update" asp-controller="Cart" asp-route-id="@item.MaHh" method="get">

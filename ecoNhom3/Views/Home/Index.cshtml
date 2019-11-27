@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "trang chu";
+    ViewData["Title"] = "Trang Chủ";
 }
 <div class="w3l_banner_nav_right" style="float:right;width:100%;">
     <section class="slider">
@@ -81,7 +81,7 @@
                 item.GiamGia = a;
                 <div class="col-sm-4 wthree_banner_bottom_left">
                     <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.MaHh">
+                       asp-route-id="@item.Url">
 
                         <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
                         <span class="thongtinsanpham">
@@ -122,7 +122,7 @@
                 item.GiamGia = a;
                 <div class="col-sm-4 wthree_banner_bottom_left">
                     <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.MaHh">
+                       asp-route-id="@item.Url">
 
                         <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
                         <span class="thongtinsanpham">
@@ -165,7 +165,7 @@
                 item.GiamGia = a;
                 <div class="col-sm-4 wthree_banner_bottom_left">
                     <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.MaHh">
+                       asp-route-id="@item.Url">
 
                         <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
                         <span class="thongtinsanpham">
@@ -208,7 +208,7 @@
                 item.GiamGia = a;
                 <div class="col-sm-4 wthree_banner_bottom_left">
                     <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.MaHh">
+                       asp-route-id="@item.Url">
 
                         <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
                         <span class="thongtinsanpham">

@@ -8,7 +8,7 @@ namespace ecoNhom3.Models
 {
     public static class FriendlyUrlHelper
     {
-        public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
+        public static string GetFriendlyTitle(string title)
         {
             if (title == null)
             {
@@ -47,14 +47,9 @@ namespace ecoNhom3.Models
                 {
                     int previousLength = stringBuilder.Length;
 
-                    if (remapToAscii)
-                    {
-                        stringBuilder.Append(RemapInternationalCharToAscii(c));
-                    }
-                    else
-                    {
-                        stringBuilder.Append(c);
-                    }
+                    
+                    stringBuilder.Append(c);
+                    
 
                     if (previousLength != stringBuilder.Length)
                     {
@@ -62,7 +57,7 @@ namespace ecoNhom3.Models
                     }
                 }
 
-                if (i == maxlength)
+                if (i == 80)
                 {
                     break;
                 }

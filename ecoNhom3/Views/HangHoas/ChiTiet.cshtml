@@ -1,6 +1,6 @@
 ﻿@model ecoNhom3.Models.ChiTietView
 @{
-    ViewData["Title"] = "chi-tiet-san-pham";
+    ViewData["Title"] = "Chi Tiet San Pham";
 }
 
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -59,7 +59,7 @@
     <div class="col-sm-4 wthree_banner_bottom_left">
 
         <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-           asp-route-id="@item.MaHh">
+           asp-route-id="@item.Url">
             @{
                 double m1 = (double)(item.GiamGia * 100);
                 double m = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia))));
@@ -96,7 +96,7 @@
         <div class="col-sm-4 wthree_banner_bottom_left">
 
             <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-               asp-route-id="@item.MaHh">
+               asp-route-id="@item.Url">
                 @{
                     double n1 = (double)(item.GiamGia * 100);
                     double n = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia))));

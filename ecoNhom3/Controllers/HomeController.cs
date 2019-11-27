@@ -16,17 +16,20 @@ namespace ecoNhom3.Controllers
         {
             context = new MyDbContext();
         }
+        
         public IActionResult Index()
         {
             
 
             return View();
         }
+        [Route("thong-tin-cua-hang")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
             return View();
         }
+        [Route("lien-he")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -43,8 +46,10 @@ namespace ecoNhom3.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-      
+
+        
         [HttpPost]
+        [Route("ket-qua-tim-kiem")]
         public IActionResult SearchSP()
         {
             string key = Request.Form["keysearch"];
@@ -70,23 +75,27 @@ namespace ecoNhom3.Controllers
            
         }
 
-    
+
+        [Route("nuoc-ngot")]
         public IActionResult ShowNuocNgot(string title)
         {
           
             return View();
         }
+        [Route("nuoc-suoi")]
         public IActionResult ShowNuocSuoi()
         {
 
             return View();
         }
+        [Route("ruou")]
         public IActionResult ShowRuou()
         {
 
             return View();
 
         }
+        [Route("bia")]
         public IActionResult ShowBia()
         {
 

@@ -21,10 +21,16 @@ namespace ecoNhom3.Models
                 return Quantity * Price;
             }
         }
+        public string Url
+        {
+            get
+            {
+                return Helper.FriendlyUrlHelper.GetFriendlyTitle(TenHh, MaHh);
+            }
+        }
 
-        
-        
- 
+
+
 
     }
 }

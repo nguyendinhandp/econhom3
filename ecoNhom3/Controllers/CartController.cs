@@ -57,6 +57,7 @@ namespace ecoNhom3.Controllers
                     Quantity = sl,
                     Hinh = hh.Hinh,
                     Price = hh.Price
+                    
  
                 };
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ecoNhom3.Models;
 using System.IO;
-
+using ecoNhom3.Helper;
 namespace ecoNhom3.Controllers
 {
    
@@ -157,26 +157,25 @@ namespace ecoNhom3.Controllers
             return _context.HangHoas.Any(e => e.MaHh == id);
         }
 
-
-
-
         
-        public IActionResult ChiTiet(int? id)
+        [Route("chi-tiet-san-pham/{id}")]
+        public IActionResult ChiTiet(string id)
         {
+            
             ChiTietView model = new ChiTietView();
             List<HangHoa> dshhcl = new List<HangHoa>();
             List<HangHoa> dshhcnhacc = new List<HangHoa>();
             HangHoa hh = new HangHoa();
 
-            if (id.HasValue)
+            if (id != null)
             {
-                hh = _context.HangHoas.SingleOrDefault(p => p.MaHh == id);
-
+                hh = _context.HangHoas.SingleOrDefault(p => p.Url == id);
+                
             }
             else
             {
                 hh = _context.HangHoas.SingleOrDefault(p => p.MaHh == HttpContext.Session.Get<int>("MaHh"));
-
+                
             }
             dshhcl = _context.HangHoas.Where(p => p.MaLoai == hh.MaLoai).ToList();
             dshhcnhacc = _context.HangHoas.Where(p => p.MaNcc == hh.MaNcc).ToList();
