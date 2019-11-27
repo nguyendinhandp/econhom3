@@ -1,6 +1,16 @@
-﻿@model ecoNhom3.Models.HoaDon
+﻿@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Session;
+@model ecoNhom3.Models.HoaDon
 @{
     ViewData["Title"] = "Edit";
+    if (Context.Session.GetInt32("LoaiTv") == 1)
+    {
+        Layout = "_Admin";
+    }
+    else
+    {
+        Layout = "_Customer";
+    }
 }
 <h2>Edit</h2>
 <h4>HoaDon</h4>
@@ -10,11 +20,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MaHd" />
-            <div class="form-group">
-                <label asp-for="MaTv" class="control-label"></label>
-                <select asp-for="MaTv" class="form-control" asp-items="ViewBag.MaTv"></select>
-                <span asp-validation-for="MaTv" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="NgayDat" class="control-label"></label>
                 <input asp-for="NgayDat" class="form-control" />
@@ -35,21 +41,32 @@
                 <input asp-for="DiaChi" class="form-control" />
                 <span asp-validation-for="DiaChi" class="text-danger"></span>
             </div>
+
+            @{
+                @if (Context.Session.GetInt32("LoaiTv") == 1)
+                {
+                    <div class="form-group">
+                        <label asp-for="MaTt" class="control-label"></label>
+                        <select asp-for="MaTt" class="form-control" asp-items="ViewBag.MaTt"></select>
+                        <span asp-validation-for="MaTt" class="text-danger"></span>
+                    </div>
+                }
+            }
             
+            <div class="form-group">
+                <label asp-for="GhiChu" class="control-label"></label>
+                <input asp-for="GhiChu" class="form-control" />
+                <span asp-validation-for="GhiChu" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="PhiShip" class="control-label"></label>
                 <input asp-for="PhiShip" class="form-control" />
                 <span asp-validation-for="PhiShip" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaTt" class="control-label"></label>
-                <select asp-for="MaTt" class="form-control" asp-items="ViewBag.MaTt"></select>
-                <span asp-validation-for="MaTt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GhiChu" class="control-label"></label>
-                <input asp-for="GhiChu" class="form-control" />
-                <span asp-validation-for="GhiChu" class="text-danger"></span>
+                <label asp-for="TongTienHang" class="control-label"></label>
+                <input asp-for="TongTienHang" class="form-control" />
+                <span asp-validation-for="TongTienHang" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -58,5 +75,5 @@
     </div>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="HoaDons">Back to List</a>
 </div>

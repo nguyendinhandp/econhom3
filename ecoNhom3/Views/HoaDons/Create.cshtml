@@ -3,6 +3,10 @@
 
 @{
     ViewData["Title"] = "Create";
+    
+    
+    Layout = "_Customer";
+    
 }
 <h2>Create</h2>
 <h4>HoaDon</h4>
@@ -12,6 +16,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="form-group">
+              
+                <input asp-for="MaTv" class="form-control" value="@Context.Session.GetInt32("MaTv")" type="hidden" />
+                <span asp-validation-for="MaTv" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 Họ Tên:
                 <input asp-for="HoTen" class="form-control" value="@Context.Session.GetString("TenTv")" />
@@ -27,11 +36,7 @@
                 <input asp-for="SdtNguoiNhan" class="form-control" />
                 <span asp-validation-for="SdtNguoiNhan" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                Địa Chỉ:
-                <input asp-for="DiaChi" class="form-control" />
-                <span asp-validation-for="DiaChi" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 Ghi chú:
                 <input asp-for="GhiChu" class="form-control" />
@@ -41,18 +46,16 @@
             <div class="form-group">
                 Tổng Hóa Đơn:
 
-                <input asp-for="TongTienHang" class="form-control" readonly value="@tt" />
-                <span asp-validation-for="TongTienHang" class="text-danger"></span>
+                <input class="form-control" readonly value="20.000 đ" />
 
 
             </div>
             <div class="form-group">
                 Phí Ship (Tính riêng):
-                <input  class="form-control" readonly value="20.000 đ" />
-                
+                <input class="form-control" readonly value="20.000 đ" />
+
 
             </div>
-
 
 
             <div class="form-group">

@@ -36,7 +36,7 @@ namespace ecoNhom3.Models
  
         public ChiTietHd ChiTietHd { get; set; }
 
-        public double TongTienHang;
+        public double TongTienHang { get; set; }
  
      
     }

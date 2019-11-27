@@ -40,13 +40,14 @@ namespace ecoNhom3
             
             services.AddMvc();
             var ChuoiKetNoi = Configuration.GetConnectionString("QLNUOC");
+          
             services.AddDbContext<MyDbContext>(options => options.UseSqlServer(ChuoiKetNoi));
             services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache();
             services.AddRouting();
             services.AddSession(option =>
             {
-                option.IdleTimeout = TimeSpan.FromMinutes(10);
+                option.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
             /**/

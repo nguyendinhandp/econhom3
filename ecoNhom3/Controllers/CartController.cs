@@ -31,11 +31,13 @@ namespace ecoNhom3.Controllers
             else
             {
                 var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
+               
+
                 ViewBag.cart = cart;
-                ViewBag.total = cart.Sum(item => item.HangHoa.Price * item.Quantity);
-              
+                ViewBag.total = cart.Sum(item => item.Price * item.Quantity);
+
             }
-                
+
             return View();
         }
 
@@ -46,7 +48,20 @@ namespace ecoNhom3.Controllers
             if (Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart") == null)
             {
                 var cart = new List<Item>();
-                cart.Add(new Item() { HangHoa = _context.HangHoas.Find(id), Quantity = sl });
+
+                HangHoa hh = _context.HangHoas.Find(id);
+                Item newItem = new Item()
+                {
+                    MaHh = hh.MaHh, // MaHh = id,
+                    TenHh = hh.TenHh,
+                    Quantity = sl,
+                    Hinh = hh.Hinh,
+                    Price = hh.Price
+ 
+                };
+
+                cart.Add(newItem);
+
                 Models.SessionExtensions.Set(HttpContext.Session, "cart", cart);
             }
             else
@@ -55,7 +70,18 @@ namespace ecoNhom3.Controllers
                 int index = Exists(cart, id);
                 if(index == -1)
                 {
-                    cart.Add(new Item() { HangHoa = _context.HangHoas.Find(id), Quantity = sl});
+                    HangHoa hh = _context.HangHoas.Find(id);
+                    Item newItem = new Item()
+                    {
+                        MaHh = hh.MaHh, // MaHh = id,
+                        TenHh = hh.TenHh,
+                        Quantity = sl,
+                        Hinh = hh.Hinh,
+                        Price = hh.Price
+
+                    };
+
+                    cart.Add(newItem);
                 }
                 else
                 {
@@ -72,7 +98,7 @@ namespace ecoNhom3.Controllers
            
             for (int i = 0; i < cart.Count; i++)
             {
-                if (cart[i].HangHoa.MaHh == id)
+                if (cart[i].MaHh == id)
                 {
                     return i;
                 }
@@ -184,7 +210,7 @@ namespace ecoNhom3.Controllers
                 return View();
             }
         }
-
+        /*
         public IActionResult ThanhToan(int mahh, int soluong, int id)
         {
             if (mahh != null)
@@ -232,6 +258,6 @@ namespace ecoNhom3.Controllers
 
 
 
-        }
+        }*/
     }
 }

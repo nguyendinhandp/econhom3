@@ -26,16 +26,26 @@ namespace ecoNhom3.Controllers
         // GET: HoaDons
         public ActionResult Index()
         {
-            
-      
+            if (HttpContext.Session.GetInt32("MaTv") == 1)
+            {
+                var hdon = _context.HoaDons.ToList();
+                return View(hdon);
+            }
 
-            return View();
+            
+            var hd = _context.HoaDons.Where(p => p.MaTv == HttpContext.Session.GetInt32("MaTv"));
+            return View(hd);
+
         }
 
         // GET: HoaDons/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            HoaDon hd = _context.HoaDons.Where(p => p.MaHd == id).First();
+            if (hd == null) return NotFound();
+
+            return View(hd);
         }
 
         // GET: HoaDons/Create
@@ -51,7 +61,7 @@ namespace ecoNhom3.Controllers
         // POST: HoaDons/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<HoaDon>> Create([Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu")] HoaDon hoaDon)
+        public async Task<ActionResult<HoaDon>> Create([Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,SdtNguoiNhan,MaTt,GhiChu,TongTienHang")] HoaDon hoaDon)
         {
             var cart = Models.SessionExtensions.Get<List<Item>>(HttpContext.Session, "cart");
             if (ModelState.IsValid)
@@ -62,19 +72,20 @@ namespace ecoNhom3.Controllers
                 hoaDon.NgayDat = d;
                 hoaDon.NgayGiao = d;
                 hoaDon.PhiShip = 20000;
-                hoaDon.MaTt = '1';
+                hoaDon.MaTt = 1;
+                hoaDon.TongTienHang = 20000;
               
                 _context.Add(hoaDon);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
             }
 
             ViewData["MaTv"] = new SelectList(_context.ThanhViens, "MaTv", "MaTv", hoaDon.MaTv);
 
             ViewData["MaTt"] = new SelectList(_context.TrangThais, "MaTt", "MaTt", hoaDon.MaTt);
 
-          
-            return View(hoaDon);
+
+            return RedirectToAction("Details", "HoaDons", new { id = hoaDon.MaHd });
         }
 
         // GET: HoaDons/Edit/5
@@ -90,7 +101,7 @@ namespace ecoNhom3.Controllers
         // POST: HoaDons/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit (int id, [Bind("MaHd,MaTv,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu")] HoaDon hoaDon)
+        public async Task<IActionResult> Edit (int id, [Bind("MaHd,NgayDat,NgayGiao,HoTen,DiaChi,PhiShip,MaTt,GhiChu,SdtNguoiNhan,TongTienHang")] HoaDon hoaDon)
         {
             if (id != hoaDon.MaHd)
             {

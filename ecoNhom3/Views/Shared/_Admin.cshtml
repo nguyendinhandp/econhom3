@@ -135,7 +135,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                                 <ul class="nav navbar-nav nav_1">
                                     <li><a asp-controller="ThanhViens" asp-action="Details" asp-route-id="@Context.Session.GetInt32("MaTv")" style="color:#fff;background-color:brown;font-size:18px;font-weight:bold;">Admin</a></li>
-
+                                    <li>
+                                        <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Index">
+                                            Danh sách tài khoản
+                                        </a>
+                                    </li>
                                     <li>
                                         <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Admin">
                                             Tài khoản Admin

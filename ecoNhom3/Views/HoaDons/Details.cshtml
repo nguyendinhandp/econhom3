@@ -1,64 +1,96 @@
 ﻿@model ecoNhom3.Models.HoaDon
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Details";
+    @if (Context.Session.GetInt32("LoaiTv") == 1)
+    {
+        Layout = "_Admin";
+    }
+    else
+    {
+        Layout = "_Customer";
+    }
 }
-<h2>Details</h2>
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        .mainmenu {
+            margin-left: 30%;
+        }
+
+        table, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        tr, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
 <div>
-    <h4>HoaDon</h4>
+    <h4>Đơn hàng /h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ThanhVien)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ThanhVien.MaTv)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDat)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayDat)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayGiao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NgayGiao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HoTen)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.PhiShip)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhiShip)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TrangThai.MaTt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.GhiChu)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GhiChu)
-        </dd>
-    </dl>
+    <table class="mainmenu">
+        @if (Context.Session.GetInt32("LoaiTv") == 1)
+        {
+            <tr>
+                <td>Mã Tv: </td>
+                <td> @Html.DisplayFor(model => model.MaTv)</td>
+            </tr>
+            <tr>
+                <td>Trạng thái đơn hàng: </td>
+                <td> @Html.DisplayFor(model => model.MaTv)</td>
+            </tr>
+        }
+
+        <tr>
+            <td>Họ Tên: </td>
+            <td> @Html.DisplayFor(model => model.HoTen)</td>
+        </tr>
+        <tr>
+            <td>Địa Chỉ: </td>
+            <td> @Html.DisplayFor(model => model.DiaChi)</td>
+        </tr>
+        <tr>
+            <td>Điện Thoại: </td>
+            <td> @Html.DisplayFor(model => model.SdtNguoiNhan)</td>
+        </tr>
+
+        <tr>
+            <td>Ngày Đặt: </td>
+            <td> @Html.DisplayFor(model => model.NgayDat)</td>
+        </tr>
+        <tr>
+            <td>Ngày Giao: </td>
+            <td> @Html.DisplayFor(model => model.NgayGiao)</td>
+        </tr>
+        <tr>
+            <td>Phí Ship (Tính riêng): </td>
+            <td> @Html.DisplayFor(model => model.PhiShip)</td>
+        </tr>
+
+        <tr>
+            <td>Tiền Hàng: </td>
+            <td> @Html.DisplayFor(model => model.TongTienHang)</td>
+        </tr>
+
+
+    </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.MaHd">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-controller="HoaDons" asp-route-id="@Model.MaHd">Edit</a> |
+    @if (Context.Session.GetInt32("LoaiTv") == 1)
+    {
+        <a asp-action="Index" asp-controller="HoaDons">Back to List</a>
+    }
+
+
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>

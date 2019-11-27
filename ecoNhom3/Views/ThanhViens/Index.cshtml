@@ -54,34 +54,43 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td style="width:170px">
-                        @Html.DisplayFor(modelItem => item.TenTv)
-                    </td>
-                    <td style="width:70px">
-                        @Html.DisplayFor(modelItem => item.GioiTinh)
-                    </td>
-                    <td style="width:110px">
-                        @Html.DisplayFor(modelItem => item.NgaySinh)
-                    </td>
-                    <td style="width: 200px">
-                        @Html.DisplayFor(modelItem => item.DiaChi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DienThoai)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td style="width: 170px">
-                        @Html.DisplayFor(modelItem => item.PhanLoaiTV.LoaiTv)
-                    </td>
-                    <td>
-                        <a asp-controller="ThanhViens" asp-action="Edit" asp-route-id="@item.MaTv" class="w3-pale-yellow w3-button">Sửa</a> |
-                        
-                        <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@item.MaTv" onclick="return confirm('Bạn có chắc muốn xóa Tài khoản này ?');" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
-                    </td>
-                </tr>
+            <tr>
+                <td style="width:170px">
+                    @Html.DisplayFor(modelItem => item.TenTv)
+                </td>
+                <td style="width:70px">
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td style="width:110px">
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td style="width: 200px">
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DienThoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                @{
+                    if (item.LoaiTv == 1)
+                    {
+                        <td style="width: 170px"> Admin</td>
+                    }
+                    else
+                    {
+                        <td style="width: 170px"> Khách hàng</td>
+                    }
+                }
+
+                <td>
+                    <a asp-controller="ThanhViens" asp-action="Edit" asp-route-id="@item.MaTv" class="w3-pale-yellow w3-button">Sửa</a> |
+
+                    <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@item.MaTv" onclick="return confirm('Bạn có chắc muốn xóa Tài khoản này ?');" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

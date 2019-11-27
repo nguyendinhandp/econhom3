@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http;
-@model ecoNhom3.Models.Item
+@model IEnumerable<ecoNhom3.Models.Item>
+
 @{
     ViewData["Title"] = "Cart";
+
 }
 
 
@@ -22,33 +24,34 @@
                 @foreach (var item in ViewBag.cart)
                 {
                     <tr>
-                        <td class="text-center"><img src="~/images/@item.HangHoa.Hinh" width="70" height="60" /> </td>
-                        <td><a asp-action="chitiet" asp-controller="HangHoas" asp-route-id="@item.HangHoa.MaHh"> @item.HangHoa.TenHh </a> </td>
+                        <td class="text-center"><img src="~/images/@item.Hinh" width="70" height="60" /> </td>
+                        <td><a asp-action="chitiet" asp-controller="HangHoas" asp-route-id="@item.MaHh"> @item.TenHh </a> </td>
 
                         <td width="80px">
-                            <form asp-action="Update" asp-controller="Cart" asp-route-id="@item.HangHoa.MaHh" method="get">
-                                <input type="hidden" name="id" value="@item.HangHoa.MaHh" />
+                            <form asp-action="Update" asp-controller="Cart" asp-route-id="@item.MaHh" method="get">
+                                <input type="hidden" name="id" value="@item.MaHh" />
                                 <input type="number" min="1" step="1" name="sl" value="@item.Quantity" />
                                 <button type="submit" class="btn btn-primary btn-sm" width="80px"> Cập nhật </button>
                             </form>
                         </td>
-                        <td> @String.Format("{0:0,0 đ}", item.HangHoa.Price) </td>
-                        <td> @String.Format("{0:0,0 đ}", (item.HangHoa.Price * item.Quantity)) </td>
+                        <td> @String.Format("{0:0,0 đ}", item.Price) </td>
+                        <td> @String.Format("{0:0,0 đ}", item.ThanhTien) </td>
 
-                        <td> <a asp-controller="cart" asp-action="remove" asp-route-id="@item.HangHoa.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                        <td> <a asp-controller="cart" asp-action="remove" asp-route-id="@item.MaHh" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
                     </tr>
                 }
                 <tr>
                     <td></td>
+
                     <td></td>
                     <td></td>
                     <td class="text-right">Tổng thành tiền:</td>
-                    <td>@String.Format("{0:0,0 đ}", ViewBag.total) </td>
-                    @{ double tt = ViewBag.total;}
+                    <td> @String.Format("{0:0,0 đ}", ViewBag.total)</td>
+                 
                 </tr>
 
             </table>
-           
+
             @if (Context.Session.GetInt32("MaTv") == null)
             {
                 <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Vui lòng đăng nhập để thanh toán!');"> Lập Đơn Hàng </a>

@@ -8,10 +8,21 @@ namespace ecoNhom3.Models
 {
     public class Item
     {
-      
-        public HangHoa HangHoa { get; set; }
-        
+
+        public string Hinh { get; set; }
+        public int MaHh { get; set; }
+        public string TenHh { get; set; }
+        public double Price { get; set; }
         public int Quantity { get; set; }
+        public double ThanhTien
+        {
+            get
+            {
+                return Quantity * Price;
+            }
+        }
+
+        
         
  
 
