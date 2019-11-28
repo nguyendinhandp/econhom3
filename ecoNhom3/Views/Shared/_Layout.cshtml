@@ -8,11 +8,12 @@
 <head>
     <title>@ViewData["Title"] - ecoNhom3</title>
 
+    <meta charset="UTF-8">
     <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
     <link rel="shortcut icon" type="image/ico" href="~/images/logo.jpg" />
     <link rel="icon" type="image/ico" href="~/images/logo.jpg" />
     <link rel="apple-touch-icon" type="image/ico" href="~/images/logo.jpg" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,13 +23,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
-    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true"/>
-    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all"asp-append-version="true" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
     <!-- font-awesome icons -->
     <link href="~/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" asp-append-version="true" />
     <!-- //font-awesome icons -->
     <!-- js -->
     <script src="~/js/jquery-1.11.1.min.js"></script>
+
     <!-- //js -->
     <link href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
@@ -43,11 +45,98 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
                 });
             });</script>
+
+
+
     }
-    <!-- start-smoth-scrolling -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+
+
 
 </head>
 <body>
+    <!--Messanger -->
+    <div class="fb-livechat" >
+        <div class="ctrlq fb-overlay"></div>
+        <div class="fb-widget">
+            <div class="ctrlq fb-close"></div>
+            <div class="fb-page" data-href="https://www.facebook.com/EcommerceNhom3-100776611402531/" 
+                 data-tabs="messages" data-width="320" data-height="410" 
+                 data-small-header="true" data-hide-cover="true" 
+                 data-show-facepile="false" >
+                
+            </div>
+            <div class="fb-credit">  </div>
+            <div id="fb-root"></div>
+        </div>
+        <a href="https://m.me/100776611402531" class="ctrlq fb-button">
+            <div class="bubble-msg">Liên hệ Fanpage</div>
+        </a>
+    </div>
+    <script src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&autoLogAppEvents=1"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var t = {
+                delay: 125, overlay: $(".fb-overlay"), widget: $(".fb-widget"), button: $(".fb-button")
+            };
+            setTimeout(function () {
+                $("div.fb-livechat").fadeIn()
+            },
+                8 * t.delay);
+
+            $(".ctrlq").on("click", function (e) {
+                e.preventDefault(), t.overlay.is(":visible") ? (t.overlay.fadeOut(t.delay),
+                    t.widget.stop().animate({ bottom: 0, opacity: 0 },
+                        2 * t.delay,
+                        function () {
+                            $(this).hide("slow"), t.button.show()
+                        })) : t.button.fadeOut("medium", function () {
+                            t.widget.stop().show().animate({
+                                bottom: "30px", opacity: 1
+                            },
+                                2 * t.delay),
+                                t.overlay.fadeIn(t.delay)
+                        })
+            })
+
+        });</script>
+
+
+
+
+    <!--to top-->
+    <button onclick="topFunction()" id="myBtn" title="Go to top"></button>
+    <script>
+        //Get the button
+        var mybutton = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+
+
     <div class="container-fluid">
         <!-- header -->
         <div class="agileits_header">
@@ -57,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 {
                     <ul class="dropdown-menu">
                         <li><a asp-controller="ThanhViens" asp-action="Create">Đăng ký tài khoản</a></li>
-                    
+
                         <li><a asp-controller="ThanhViens" asp-action="Login">Đăng nhập</a></li>
                     </ul>
 
@@ -85,14 +174,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="product_list_header">
 
                 <a asp-action="Index" asp-controller="Cart">
-                    <input type="submit" name="name" value="Giỏ Hàng" class="button"/>
+                    <input type="submit" name="name" value="Giỏ Hàng" class="button" />
                 </a>
             </div>
             <div class="nav navbar-nav navbar-right" style="margin-right:10px;">
                 @using (Html.BeginForm("SearchSP", "Home"))
                 {
                     <input style="margin-top:10px;color: black" type="text" name="keysearch" value="" placeholder="Tìm kiếm Sản Phẩm" />
-                    <input style="margin-top:10px" type="submit" name="name" value="Tìm Kiếm" />
+                    <input style="margin-top:10px; border-radius: 4px; background-color: yellow; color: red;" type="submit" name="name" value="Tìm Kiếm" />
                 }
 
 
@@ -118,9 +207,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="logo_products" style="padding: 2em 0px 0em;">
             <div class="container">
                 <div style="text-align: center; border-bottom: solid 1px red">
-                    
-                    <a style="color:#000033;font-size:60px;font-weight:bolder;text-decoration: none; color:mediumvioletred;"> 
-                    <img src="~/images/logo.jpg" style="width:100px; height:100px; margin-right:50px" />  econhom3 Drinks
+
+                    <a style="color:#000033;font-size:60px;font-weight:bolder;text-decoration: none; color:mediumvioletred;">
+                        <img src="~/images/logo.jpg" style="width:100px; height:100px; margin-right:50px" />  econhom3 Drinks
                     </a>
                 </div>
 
@@ -128,7 +217,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
 
-        <!-- //header --> 
+        <!-- //header -->
         <div class="row" style="margin-right:-29px;margin-left:-29px;">
             <div class="col-md-3">
                 <!-- banner -->
@@ -217,7 +306,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="w3_footer_grid_bottom">
                                 <h5>connect with us</h5>
                                 <ul class="agileits_social_icons">
-                                    <li><a href="https://www.facebook.com/EcommerceNhom3-100776611402531/" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.facebook.com/EcommerceNhom3-100776611402531/" class="facebook"><i class="fa fa-facebook" aria-hidden="true" target="_blank"></i></a></li>
                                     <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                                     <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 
@@ -279,16 +368,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
         });</script>
 
-    <!--Facebook-->
-    <div id="fb-root"></div>
-    <script>
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=345381992927311&autoLogAppEvents=1';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+
 
 
     @RenderSection("Scripts", required: false)

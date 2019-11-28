@@ -52,6 +52,7 @@ namespace ecoNhom3.Controllers
         [Route("ket-qua-tim-kiem")]
         public IActionResult SearchSP()
         {
+            
             string key = Request.Form["keysearch"];
             var sp = from s in context.HangHoas
                        join l in context.Loais
@@ -70,6 +71,7 @@ namespace ecoNhom3.Controllers
                            Hinh = s.Hinh,
                            MoTa = s.MoTa
                        };
+           
             return View(sp);
 
            
