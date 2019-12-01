@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using ecoNhom3.Helper;
 
 namespace ecoNhom3.Models
 {
@@ -24,5 +25,12 @@ namespace ecoNhom3.Models
       
 
         public ICollection<HangHoa> HangHoa { get; set; }
+        public string TenNccTk
+        {
+            get
+            {
+                return Helper.FriendlyUrlHelper.Search(TenNcc);
+            }
+        }
     }
 }

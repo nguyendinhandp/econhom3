@@ -42,6 +42,14 @@ namespace ecoNhom3.Models
                 return Helper.FriendlyUrlHelper.GetFriendlyTitle(TenHh,MaHh);
             }
         }
+        public string TenHhTk
+        {
+            get
+            {
+                return Helper.FriendlyUrlHelper.Search(TenHh);
+            }
+        }
        
+
     }
 }

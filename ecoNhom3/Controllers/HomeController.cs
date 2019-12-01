@@ -54,12 +54,13 @@ namespace ecoNhom3.Controllers
         {
             
             string key = Request.Form["keysearch"];
+            key = Helper.FriendlyUrlHelper.Search(key);
             var sp = from s in context.HangHoas
                        join l in context.Loais
                        on s.MaLoai equals l.MaLoai
                        join n in context.NhaCungCaps
                        on s.MaNcc equals n.MaNcc
-                       where s.TenHh.Contains(key) || l.TenLoai.Contains(key) || n.TenNcc.Contains(key)
+                       where s.TenHhTk.Contains(key) || l.TenLoaiTk.Contains(key) || n.TenNccTk.Contains(key)
                        select new HangHoa
                        {
                            MaHh = s.MaHh,
