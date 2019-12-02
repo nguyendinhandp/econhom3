@@ -46,6 +46,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             });</script>
     }
     <!-- start-smoth-scrolling -->
+    <!--mailchimp-->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        #mc_embed_signup {
+            background: #fff;
+            clear: left;
+            font: 14px Helvetica,Arial,sans-serif;
+            width: 300px;
+        }
+        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+    </style>
 
 </head>
 <body>
@@ -169,6 +182,83 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- //fresh-vegetables -->
         <!-- footer -->
         <footer class="row">
+            <!-- Load Facebook SDK for JavaScript -->
+            <div id="fb-root"></div>
+            <script>
+                $(document).ready(function () {
+                    $('#send-message').click(function () {
+                        $(this).fadeOut();
+                        setTimeout(function () {
+                            $('#fa-message')
+                                .css({
+                                    bottom: '0px'
+                                });
+                        }, 500);
+                    });
+                    $('#fa-message .heading').click(function () {
+                        $('#fa-message').css({
+                            bottom: '-333px'
+                        });
+                        setTimeout(function () {
+                            $('#send-message').fadeIn();
+                        }, 1000);
+                    });
+                    $.scrolltop();
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+            </script>
+            <script type="text/javascript">
+                window.fbAsyncInit = function () {
+                    FB.init({
+                        appId: '2433516863577384',
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v5.0'
+                    });
+                };
+
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+            <!-- Your customer chat code -->
+            <div class="fb-customerchat"
+                 attribution=setup_tool
+                 page_id="100776611402531"
+                 theme_color="#13cf13"
+                 logged_in_greeting="Xin Chào! Chúng tôi có thể hỗ trợ gì cho bạn?"
+                 logged_out_greeting="Xin Chào! Chúng tôi có thể hỗ trợ gì cho bạn?">
+            </div>
+
+
+            <!--to top-->
+            <button onclick="topFunction()" id="myBtn" title="Go to top"></button>
+            <script>
+                //Get the button
+                var mybutton = document.getElementById("myBtn");
+
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function () { scrollFunction() };
+
+                function scrollFunction() {
+                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                        mybutton.style.display = "block";
+                    } else {
+                        mybutton.style.display = "none";
+                    }
+                }
+
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                }
+            </script>
+
             <div class="footer">
                 <div class="container">
                     <div class="col-md-3 w3_footer_grid">
@@ -176,6 +266,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <h3>Thông tin cửa hàng</h3>
                         <ul class="w3_footer_grid_list">
                             <li><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
+                            <li style="color:#999">ĐT: 25251325</li>
+                            <li style="color:#999">ĐC: Quận 5 - TP. HCM</li>
+                            <li style="color:#999">Imail: econhom3@gmail.com</li>
+                            <li><a href="https://www.facebook.com/EcommerceNhom3-100776611402531/" target="_blank">Fanpage: ecoNhom3</a></li>
 
                         </ul>
                     </div>
@@ -190,27 +284,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </ul>
                     </div>
 
+                    <div class="col-md-3 w3_footer_grid">
 
-                    <div class="agile_footer_grids">
-                        <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-                            <div class="w3_footer_grid_bottom">
-                                <h4>100% secure payments</h4>
-                                <img src="~/images/card.png" alt=" " class="img-responsive" />
+                        <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v4.0&appId=100776611402531&autoLogAppEvents=1"></script>
+                        <div class="fb-page" data-href="https://www.facebook.com/EcommerceNhom3-100776611402531/" data-tabs="timeline" data-width="500" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/EcommerceNhom3-100776611402531/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/EcommerceNhom3-100776611402531/">ecoNhom3</a></blockquote>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"> </div>
+
+                    <!-- Begin Mailchimp Signup Form -->
+
+                    <form class="mc-trial row" action="https://somee.us4.list-manage.com/subscribe/post?u=f877dd4aceb6374fb11645685&amp;id=12e1ca0ec2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                        <p style="text-align:center; margin-top:50px; margin-bottom:20px; color: yellow; text-decoration: underline">Đăng ký nhận thông tin khuyến mãi từ cửa hàng</p>
+                        <div class="form-group col-md-3 col-md-offset-2 col-sm-4">
+                            <div class=" controls">
+                                <input name="NAME" placeholder="Nhập Tên Của Bạn" class="form-control" type="text">
                             </div>
                         </div>
-                        <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-                            <div class="w3_footer_grid_bottom">
-                                <h5>connect with us</h5>
-                                <ul class="agileits_social_icons">
-                                    <li><a href="https://www.facebook.com/EcommerceNhom3-100776611402531/" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-
-                                </ul>
+                        <!-- End email input -->
+                        <div class="form-group col-md-3 col-sm-4">
+                            <div class=" controls">
+                                <input name="EMAIL" placeholder="Nhập Email Của Bạn" class="form-control" type="email">
                             </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-4">
+                            <p>
+                                <button type="submit" class="btn btn-block btn-submit" name="subscribe">
+                                    Đăng Ký <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </p>
                         </div>
                         <div class="clearfix"> </div>
-                    </div>
+                        <div id="mce-responses" style="color: aqua">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div>
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f877dd4aceb6374fb11645685_12e1ca0ec2" tabindex="-1" value=""></div>
+
+                    </form>
+
+                    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+                    <script type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[1] = 'NAME'; ftypes[1] = 'text'; fnames[0] = 'EMAIL'; ftypes[0] = 'email'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+                    <!--End mc_embed_signup-->
+
+                    <div class="clearfix"> </div>
+
                     <div class="wthree_footer_copy">
                         <p>&copy;  ecoNhom3</p>
                     </div>
