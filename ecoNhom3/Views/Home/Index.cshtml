@@ -1,241 +1,256 @@
-﻿@{
-    ViewData["Title"] = "Trang Chủ";
-}
-<div class="w3l_banner_nav_right" style="float:right;width:100%;">
-    <section class="slider">
-        <div class="flexslider">
-            <ul class="slides">
-                <li>
-                    <div class="w3l_banner_nav_right_banner" style="background-image:url(./images/banner/bannerNN.png);min-height:300px;min-width:900px;">
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title> ecoNhom3</title>
 
-                        <div class="more">
+    <!--share-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ECONHOM3 DRINKS">
+    <meta property="og:description" content="econhom3 cung cấp các loại nước giải khát, rượu, bia...">
+    <meta property="og:url" content="http://www.econhom3.somee.com/">
+    <meta property="og:site_name" content="econhom3">
+    <meta property="og:image" content="image/logo.jpg">
+    <meta property="fb:app_id" content="516801905579705">
+</head>
+<body>
+    <div class="w3l_banner_nav_right" style="float:right;width:100%;">
+        <section class="slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <div class="w3l_banner_nav_right_banner" style="background-image:url(./images/banner/bannerNN.png);min-height:300px;min-width:900px;">
+
+                            <div class="more">
+
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="w3l_banner_nav_right_banner1" style="background-image:url(./images/banner/bannerNS.jpg);min-height:300px;min-width:900px;">
+
 
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l_banner_nav_right_banner1" style="background-image:url(./images/banner/bannerNS.jpg);min-height:300px;min-width:900px;">
+                    </li>
+                    <li>
+                        <div class="w3l_banner_nav_right_banner2" style="background-image:url(./images/banner/bannerR.jpg);min-height:300px;min-width:900px;">
 
-
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l_banner_nav_right_banner2" style="background-image:url(./images/banner/bannerR.jpg);min-height:300px;min-width:900px;">
-
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- flexSlider -->
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
-    <script defer src="js/jquery.flexslider.js"></script>
-    <script type="text/javascript">
-        $(window).load(function () {
-            $('.flexslider').flexslider({
-                animation: "slide",
-                start: function (slider) {
-                    $('body').removeClass('loading');
-                }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- flexSlider -->
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
+        <script defer src="js/jquery.flexslider.js"></script>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('.flexslider').flexslider({
+                    animation: "slide",
+                    start: function (slider) {
+                        $('body').removeClass('loading');
+                    }
+                });
             });
-        });
-    </script>
-    <!-- //flexSlider -->
-</div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-<br />
-
-<!-- banner -->
-
-<div class="banner_bottom" style="padding:1em 0 !important;">
-    <div class="wthree_banner_bottom_left_grid_sub">
+        </script>
+        <!-- //flexSlider -->
     </div>
-    <p style="color: #6ea534;font-weight: 900;font-size: 30px;">NƯỚC NGỌT NEW</p>
-    <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
-        @{
-            MyDbContext db = new MyDbContext();
-            var nuocngot = db.HangHoas.Where(p => p.MaLoai == 1).OrderByDescending(x => x.MaHh).Take(3);
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-            var nuocsuoi = db.HangHoas.Where(p => p.MaLoai == 2).OrderByDescending(x => x.MaHh).Take(3);
+    <br />
 
-            var ruou = db.HangHoas.Where(p => p.MaLoai == 3).OrderByDescending(x => x.MaHh).Take(3);
+    <!-- banner -->
 
-            var bia = db.HangHoas.Where(p => p.MaLoai == 4).OrderByDescending(x => x.MaHh).Take(3);
+    <div class="banner_bottom" style="padding:1em 0 !important;">
+        <div class="wthree_banner_bottom_left_grid_sub">
+        </div>
+        <p style="color: #6ea534;font-weight: 900;font-size: 30px;">NƯỚC NGỌT NEW</p>
+        <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
+            @{
+                MyDbContext db = new MyDbContext();
+                var nuocngot = db.HangHoas.Where(p => p.MaLoai == 1).OrderByDescending(x => x.MaHh).Take(3);
 
-        }
-        @{
-            foreach (var item in nuocngot)
-            {
-                double a = (double)item.GiamGia * 100;
-                item.GiamGia = a;
-                <div class="col-sm-4 wthree_banner_bottom_left">
-                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.Url">
+                var nuocsuoi = db.HangHoas.Where(p => p.MaLoai == 2).OrderByDescending(x => x.MaHh).Take(3);
 
-                        <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
-                        <span class="thongtinsanpham">
-                            <h4 class="tensanpham">@item.TenHh</h4>
-                            <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
-                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
-                            @{
-                                double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
-                                item.DonGia = b;
-                            }
-                            <div style="float:left;">
-                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
-                            </div>
+                var ruou = db.HangHoas.Where(p => p.MaLoai == 3).OrderByDescending(x => x.MaHh).Take(3);
 
-                        </span>
-                        <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
-                            @item.TenHh
-                        </p>
-                        <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                            @String.Format("{0:0,0 đ}", item.DonGia) / SP
-                        </p>
-                    </a>
-                </div>
+                var bia = db.HangHoas.Where(p => p.MaLoai == 4).OrderByDescending(x => x.MaHh).Take(3);
+
             }
-        }
-    </div>
-    <div class="clearfix"> </div>
-</div>
-<div class="banner_bottom" style="padding:1em 0 !important;">
-    <div class="wthree_banner_bottom_left_grid_sub">
-    </div>
-    <p style="color: #6ea534;font-weight: 900;font-size: 30px;">NƯỚC SUỐI NEW</p>
-    <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
-        @{
-            foreach (var item in nuocsuoi)
-            {
-                double a = (double)item.GiamGia * 100;
-                item.GiamGia = a;
-                <div class="col-sm-4 wthree_banner_bottom_left">
-                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.Url">
+            @{
+                foreach (var item in nuocngot)
+                {
+                    double a = (double)item.GiamGia * 100;
+                    item.GiamGia = a;
+                    <div class="col-sm-4 wthree_banner_bottom_left">
+                        <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                           asp-route-id="@item.Url">
 
-                        <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
-                        <span class="thongtinsanpham">
-                            <h4 class="tensanpham">@item.TenHh</h4>
-                            <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
-                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
-                            @{
-                                double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
-                                item.DonGia = b;
-                            }
-                            <div style="float:left;">
-                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn : </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
-                            </div>
+                            <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
+                            <span class="thongtinsanpham">
+                                <h4 class="tensanpham">@item.TenHh</h4>
+                                <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
+                                <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
+                                @{
+                                    double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
+                                    item.DonGia = b;
+                                }
+                                <div style="float:left;">
+                                    <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
+                                </div>
 
-                        </span>
-                        <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
-                            @item.TenHh
-                        </p>
-                        <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                            @String.Format("{0:0,0 đ}", item.DonGia) / SP
-                        </p>
-                    </a>
-                </div>
+                            </span>
+                            <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                                @item.TenHh
+                            </p>
+                            <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                                @String.Format("{0:0,0 đ}", item.DonGia) / SP
+                            </p>
+                        </a>
+                    </div>
+                }
             }
-        }
+        </div>
+        <div class="clearfix"> </div>
     </div>
-    <div class="clearfix"> </div>
-</div>
+    <div class="banner_bottom" style="padding:1em 0 !important;">
+        <div class="wthree_banner_bottom_left_grid_sub">
+        </div>
+        <p style="color: #6ea534;font-weight: 900;font-size: 30px;">NƯỚC SUỐI NEW</p>
+        <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
+            @{
+                foreach (var item in nuocsuoi)
+                {
+                    double a = (double)item.GiamGia * 100;
+                    item.GiamGia = a;
+                    <div class="col-sm-4 wthree_banner_bottom_left">
+                        <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                           asp-route-id="@item.Url">
 
+                            <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
+                            <span class="thongtinsanpham">
+                                <h4 class="tensanpham">@item.TenHh</h4>
+                                <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
+                                <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
+                                @{
+                                    double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
+                                    item.DonGia = b;
+                                }
+                                <div style="float:left;">
+                                    <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn : </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
+                                </div>
 
-<div class="banner_bottom" style="padding:1em 0 !important;">
-    <div class="wthree_banner_bottom_left_grid_sub">
-    </div>
-    <p style="color: #6ea534;font-weight: 900;font-size: 30px;">RƯỢU NGOẠI NEW</p>
-    <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
-        @{
-            foreach (var item in ruou)
-            {
-                double a = (double)item.GiamGia * 100;
-                item.GiamGia = a;
-                <div class="col-sm-4 wthree_banner_bottom_left">
-                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.Url">
-
-                        <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
-                        <span class="thongtinsanpham">
-                            <h4 class="tensanpham">@item.TenHh</h4>
-                            <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
-                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
-                            @{
-                                double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
-                                item.DonGia = b;
-                            }
-                            <div style="float:left;">
-                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn : </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
-                            </div>
-
-                        </span>
-                        <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
-                            @item.TenHh
-                        </p>
-                        <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                            @String.Format("{0:0,0 đ}", item.DonGia) / SP
-                        </p>
-                    </a>
-                </div>
+                            </span>
+                            <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                                @item.TenHh
+                            </p>
+                            <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                                @String.Format("{0:0,0 đ}", item.DonGia) / SP
+                            </p>
+                        </a>
+                    </div>
+                }
             }
-        }
+        </div>
+        <div class="clearfix"> </div>
     </div>
-    <div class="clearfix"> </div>
-</div>
 
 
-<div class="banner_bottom" style="padding:1em 0 !important;">
-    <div class="wthree_banner_bottom_left_grid_sub">
-    </div>
-    <p style="color: #6ea534;font-weight: 900;font-size: 30px;">BIA NEW</p>
-    <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
-        @{
-            foreach (var item in bia)
-            {
-                double a = (double)item.GiamGia * 100;
-                item.GiamGia = a;
-                <div class="col-sm-4 wthree_banner_bottom_left">
-                    <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-                       asp-route-id="@item.Url">
+    <div class="banner_bottom" style="padding:1em 0 !important;">
+        <div class="wthree_banner_bottom_left_grid_sub">
+        </div>
+        <p style="color: #6ea534;font-weight: 900;font-size: 30px;">RƯỢU NGOẠI NEW</p>
+        <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
+            @{
+                foreach (var item in ruou)
+                {
+                    double a = (double)item.GiamGia * 100;
+                    item.GiamGia = a;
+                    <div class="col-sm-4 wthree_banner_bottom_left">
+                        <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                           asp-route-id="@item.Url">
 
-                        <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
-                        <span class="thongtinsanpham">
-                            <h4 class="tensanpham">@item.TenHh</h4>
-                            <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
-                            <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
-                            @{
-                                double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
-                                item.DonGia = b;
-                            }
-                            <div style="float:left;">
-                                <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn : </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
-                            </div>
+                            <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
+                            <span class="thongtinsanpham">
+                                <h4 class="tensanpham">@item.TenHh</h4>
+                                <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
+                                <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
+                                @{
+                                    double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
+                                    item.DonGia = b;
+                                }
+                                <div style="float:left;">
+                                    <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn : </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
+                                </div>
 
-                        </span>
-                        <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
-                            @item.TenHh
-                        </p>
-                        <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                            @String.Format("{0:0,0 đ}", item.DonGia) / SP
-                        </p>
-                    </a>
-                </div>
+                            </span>
+                            <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                                @item.TenHh
+                            </p>
+                            <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                                @String.Format("{0:0,0 đ}", item.DonGia) / SP
+                            </p>
+                        </a>
+                    </div>
+                }
             }
-        }
+        </div>
+        <div class="clearfix"> </div>
     </div>
-    <div class="clearfix"> </div>
-</div>
 
 
+    <div class="banner_bottom" style="padding:1em 0 !important;">
+        <div class="wthree_banner_bottom_left_grid_sub">
+        </div>
+        <p style="color: #6ea534;font-weight: 900;font-size: 30px;">BIA NEW</p>
+        <div class="wthree_banner_bottom_left_grid_sub1" style="width: 98%;float:left;">
+            @{
+                foreach (var item in bia)
+                {
+                    double a = (double)item.GiamGia * 100;
+                    item.GiamGia = a;
+                    <div class="col-sm-4 wthree_banner_bottom_left">
+                        <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                           asp-route-id="@item.Url">
+
+                            <img src="~/images/@item.Hinh" style="min-height:300px;min-width:30px" />
+                            <span class="thongtinsanpham">
+                                <h4 class="tensanpham">@item.TenHh</h4>
+                                <span style="color:red;font-weight:700;font-size:30px;">GIẢM @item.GiamGia %</span>
+                                <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia)</div>
+                                @{
+                                    double b = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia) / 100)));
+                                    item.DonGia = b;
+                                }
+                                <div style="float:left;">
+                                    <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn : </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
+                                </div>
+
+                            </span>
+                            <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                                @item.TenHh
+                            </p>
+                            <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                                @String.Format("{0:0,0 đ}", item.DonGia) / SP
+                            </p>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+
+</body>
+</html>

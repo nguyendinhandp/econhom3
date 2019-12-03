@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewData["Title"] - Customer</title>
+    <title>Tài Khoản Khách Hàng</title>
 
     <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
     <link rel="shortcut icon" type="image/ico" href="~/images/logo.jpg" />
@@ -62,6 +62,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5de5f2acbef31da9"></script>
     <div class="container-fluid">
         <!-- header -->
         <div class="agileits_header">
@@ -148,7 +150,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                                 <ul class="nav navbar-nav nav_1">
-                                    <li><a  style="color:#fff;background-color:brown;font-size:18px;font-weight:bold;"> TK: @Context.Session.GetString("TaiKhoan")</a></li>
+                                    <li><a style="color:#fff;background-color:brown;font-size:18px;font-weight:bold;"> TK: @Context.Session.GetString("TaiKhoan")</a></li>
 
                                     <li>
                                         <a style="padding:4px 0px 4px 40px;" asp-controller="ThanhViens" asp-action="Details" asp-route-id="@Context.Session.GetInt32("MaTv")">
@@ -160,7 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             Lịch sử mua hàng
                                         </a>
                                     </li>
-                                 
+
 
 
 
