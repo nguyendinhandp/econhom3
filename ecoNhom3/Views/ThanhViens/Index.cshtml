@@ -28,6 +28,9 @@
         <thead>
             <tr>
                 <th>
+                    Tên Đăng Nhập
+                </th>
+                <th>
                     Họ Tên
                 </th>
                 <th>
@@ -55,6 +58,9 @@
             @foreach (var item in Model)
             {
             <tr>
+                <td style="width:170px">
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
                 <td style="width:170px">
                     @Html.DisplayFor(modelItem => item.TenTv)
                 </td>

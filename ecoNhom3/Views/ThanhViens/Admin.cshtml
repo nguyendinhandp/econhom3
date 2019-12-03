@@ -22,6 +22,9 @@
         <thead>
             <tr>
                 <th>
+                    Tài Khoản
+                </th>
+                <th>
                     Họ Tên
                 </th>
                 <th>
@@ -48,30 +51,33 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td >
-                        @Html.DisplayFor(modelItem => item.TenTv)
-                    </td>
-                    <td >
-                        @Html.DisplayFor(modelItem => item.GioiTinh)
-                    </td>
-                    <td >
-                        @Html.DisplayFor(modelItem => item.NgaySinh)
-                    </td>
-                    <td >
-                        @Html.DisplayFor(modelItem => item.DiaChi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DienThoai)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        <a asp-controller="ThanhViens" asp-action="Edit" asp-route-id="@item.MaTv" class="w3-pale-yellow w3-button">Sửa</a> |
-                        <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@item.MaTv" onclick="return confirm('Bạn có chắc muốn xóa Tài khoản này ?');" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenTv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DienThoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-controller="ThanhViens" asp-action="Edit" asp-route-id="@item.MaTv" class="w3-pale-yellow w3-button">Sửa</a> |
+                    <a asp-action="Delete" asp-controller="ThanhViens" asp-route-id="@item.MaTv" onclick="return confirm('Bạn có chắc muốn xóa Tài khoản này ?');" class="w3-bar-item w3-padding w3-pale-red w3-button">Xóa</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
