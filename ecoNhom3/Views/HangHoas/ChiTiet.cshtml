@@ -3,125 +3,142 @@
     ViewData["Title"] = "Chi Tiet San Pham";
 }
 
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SẢN PHẨM ECONHOM3">
+    <meta property="og:description" content="econhom3 cung cấp các loại nước giải khát, rượu, bia...">
+    <meta property="og:url" content="http://www.econhom3.somee.com/">
+    <meta property="og:site_name" content="econhom3">
+    <meta property="og:image" content="image/logo.jpg">
+    <meta property="fb:app_id" content="516801905579705">
 
 
-<div class="row">
-   
-    <div class="col-sm-4" style="height:500px;">
-        <img src="~/images/@Model.hh.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; " />
-        <hr />
-    </div>
-    <div class="col-sm-4" style="height:500px; margin-left:50px">
-        <h1 style="color:black;font-weight:700">@Model.hh.TenHh</h1>
-        <hr />
-        <h4>Mô Tả:</h4>
-        <p>@Model.hh.MoTa</p>
-        <br />
-        <h4>Đơn giá :   <span style="color:coral;font-size:20px; margin-left: 5px"> @String.Format("{0:0,0 đ}", Model.hh.DonGia) / SP</span></h4>
-        @{
-            double b = (double)(Model.hh.DonGia - ((double)((Model.hh.DonGia * Model.hh.GiamGia))));
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
 
-        }
-        <h4>Giá bán :   <span style="color:coral;font-size:20px; margin-left: 5px"> @String.Format("{0:0,0 đ}", b) / SP </span></h4>
-        <br />
-        <form asp-controller="cart" asp-action="buy" asp-route-id="@Model.hh.MaHh" method="get">
-            <input type="hidden" value="@Model.hh.MaHh" name="mahh" />
-            <br />
-            <span>
-                Số Lượng :
-                <br />
-                <input type="number" min="1" step="1" name="sl" value="1" style="text-align: right" />
-            </span>
-            <br />
-            <div class="row">
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary" style="width:185px;">Thêm Vào Giỏ</button>
-                </div>
-            </div>
-        </form>
-    </div>
+    <div class="row">
 
-
-</div>
-
-
-<div class="row" style="margin-left:2px; margin-right:5px">
-    <h4 style="color:black;font-size:2.5em">SẢN PHẨM CÙNG LOẠI</h4>
-    <hr />
-
-    @foreach (var item in Model.hhCungLoai.OrderByDescending(x => x.MaHh).Take(3))
-    {
-    <div class="col-sm-4 wthree_banner_bottom_left">
-
-        <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-           asp-route-id="@item.Url">
-            @{
-                double m1 = (double)(item.GiamGia * 100);
-                double m = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia))));
-                item.DonGia = m;
-            }
-            <img src="~/images/@item.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; border: 1px solid #9ECDBD ;" />
-            <span class="thongtinsanpham">
-                <h4 class="tensanpham">@item.TenHh</h4>
-                <span style="color:red;font-weight:700;font-size:30px;">GIẢM @m1 %</span>
-                <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia) / SP</div>
-
-                <div style="float:left;">
-                    <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
-                </div>
-
-            </span>
-            <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
-                @item.TenHh
-            </p>
-            <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                @String.Format("{0:0,0 đ}", item.DonGia) / SP
-            </p>
-        </a>
-
-                </div>
-    }
-
-</div>
-<div class="row" style="margin-left:2px; margin-right:5px">
-    <h4 style="color:black;font-size:2.5em">SẢN PHẨM CÙNG NHÀ CUNG CẤP</h4>
-    <hr />
-    @foreach (var item in Model.hhCungNcc.OrderByDescending(x => x.MaHh).Take(3))
-    {
-        <div class="col-sm-4 wthree_banner_bottom_left">
-
-            <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
-               asp-route-id="@item.Url">
-                @{
-                    double n1 = (double)(item.GiamGia * 100);
-                    double n = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia))));
-                    item.DonGia = n;
-                }
-                <img src="~/images/@item.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; border: 1px solid #9ECDBD ;" />
-                <span class="thongtinsanpham">
-                    <h4 class="tensanpham">@item.TenHh</h4>
-                    <span style="color:red;font-weight:700;font-size:30px;">GIẢM @n1 %</span>
-                    <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia) / SP</div>
-                    
-                    <div style="float:left;">
-                        <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
-                    </div>
-
-                </span>
-                <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
-                    @item.TenHh
-                </p>
-                <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
-                    @String.Format("{0:0,0 đ}", item.DonGia) / SP
-                </p>
-            </a>
-
+        <div class="col-sm-4" style="height:500px;">
+            <img src="~/images/@Model.hh.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; " />
+            <hr />
         </div>
-    }
-    
-</div>
+        <div class="col-sm-4" style="height:500px; margin-left:50px">
+            <h1 style="color:black;font-weight:700">@Model.hh.TenHh</h1>
+            <hr />
+            <h4>Mô Tả:</h4>
+            <p>@Model.hh.MoTa</p>
+            <br />
+            <h4>Đơn giá :   <span style="color:coral;font-size:20px; margin-left: 5px"> @String.Format("{0:0,0 đ}", Model.hh.DonGia) / SP</span></h4>
+            @{
+                double b = (double)(Model.hh.DonGia - ((double)((Model.hh.DonGia * Model.hh.GiamGia))));
+
+            }
+            <h4>Giá bán :   <span style="color:coral;font-size:20px; margin-left: 5px"> @String.Format("{0:0,0 đ}", b) / SP </span></h4>
+            <br />
+            <form asp-controller="cart" asp-action="buy" asp-route-id="@Model.hh.MaHh" method="get">
+                <input type="hidden" value="@Model.hh.MaHh" name="mahh" />
+                <br />
+                <span>
+                    Số Lượng :
+                    <br />
+                    <input type="number" min="1" step="1" name="sl" value="1" style="text-align: right" />
+                </span>
+                <br />
+                <div class="row">
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary" style="width:185px;">Thêm Vào Giỏ</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+    <div class="row" style="margin-left:2px; margin-right:5px">
+        <h4 style="color:black;font-size:2.5em">SẢN PHẨM CÙNG LOẠI</h4>
+        <hr />
+
+        @foreach (var item in Model.hhCungLoai.OrderByDescending(x => x.MaHh).Take(3))
+        {
+            <div class="col-sm-4 wthree_banner_bottom_left">
+
+                <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                   asp-route-id="@item.Url">
+                    @{
+                        double m1 = (double)(item.GiamGia * 100);
+                        double m = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia))));
+                        item.DonGia = m;
+                    }
+                    <img src="~/images/@item.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; border: 1px solid #9ECDBD ;" />
+                    <span class="thongtinsanpham">
+                        <h4 class="tensanpham">@item.TenHh</h4>
+                        <span style="color:red;font-weight:700;font-size:30px;">GIẢM @m1 %</span>
+                        <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia) / SP</div>
+
+                        <div style="float:left;">
+                            <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
+                        </div>
+
+                    </span>
+                    <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                        @item.TenHh
+                    </p>
+                    <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                        @String.Format("{0:0,0 đ}", item.DonGia) / SP
+                    </p>
+                </a>
+
+            </div>
+        }
+
+    </div>
+    <div class="row" style="margin-left:2px; margin-right:5px">
+        <h4 style="color:black;font-size:2.5em">SẢN PHẨM CÙNG NHÀ CUNG CẤP</h4>
+        <hr />
+        @foreach (var item in Model.hhCungNcc.OrderByDescending(x => x.MaHh).Take(3))
+        {
+            <div class="col-sm-4 wthree_banner_bottom_left">
+
+                <a asp-action="chitiet" asp-controller="HangHoas" class="_hanghoa1"
+                   asp-route-id="@item.Url">
+                    @{
+                        double n1 = (double)(item.GiamGia * 100);
+                        double n = (double)(item.DonGia - ((double)((item.DonGia * item.GiamGia))));
+                        item.DonGia = n;
+                    }
+                    <img src="~/images/@item.Hinh" style="max-height:600px;max-width:400px;min-height:350px;min-width:40px; border: 1px solid #9ECDBD ;" />
+                    <span class="thongtinsanpham">
+                        <h4 class="tensanpham">@item.TenHh</h4>
+                        <span style="color:red;font-weight:700;font-size:30px;">GIẢM @n1 %</span>
+                        <div class="danhmucsanpham" style="text-decoration: line-through; float:left; margin-top:35px;">@String.Format("{0:0,0 đ}", item.DonGia) / SP</div>
+
+                        <div style="float:left;">
+                            <span style="color: #0c0c0c;font-size: 20px;margin-left:10px;"> Chỉ còn:  </span><span style="color:red;font-size:25px;font-weight:500;"> @String.Format("{0:0,0 đ}", item.DonGia)</span>
+                        </div>
+
+                    </span>
+                    <p style="color:blue;font-weight:500;font-size:30px; text-align:center; background-color:darkseagreen ; ">
+                        @item.TenHh
+                    </p>
+                    <p style="color:ghostwhite;font-weight:500;font-size:30px; text-align:center; background-color:firebrick; ">
+                        @String.Format("{0:0,0 đ}", item.DonGia) / SP
+                    </p>
+                </a>
+
+            </div>
+        }
+
+    </div>
+</body>
+</html>
