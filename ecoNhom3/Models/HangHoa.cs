@@ -49,6 +49,14 @@ namespace ecoNhom3.Models
                 return Helper.FriendlyUrlHelper.Search(TenHh);
             }
         }
+        public string image
+        {
+            get
+            {
+                string imagelink = "http://www.econhom3.somee.com/images/" + Hinh;
+                return imagelink;
+            }
+        }
        
 
     }

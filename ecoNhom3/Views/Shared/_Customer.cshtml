@@ -60,10 +60,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
     </style>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153795173-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-153795173-1');
+    </script>
+
 </head>
 <body>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5de5f2acbef31da9"></script>
+
     <div class="container-fluid">
         <!-- header -->
         <div class="agileits_header">
@@ -313,7 +324,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
 
-                        <div class="col-md-2 col-sm-4">
+                        <div class="col-md-3 col-sm-4">
                             <p>
                                 <button type="submit" class="btn btn-block btn-submit" name="subscribe">
                                     Đăng Ký <i class="fa fa-arrow-right"></i>
@@ -366,41 +377,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             $().UItoTop({ easingType: 'easeOutQuart' });
 
         });</script>
-    <!-- //here ends scrolling icon -->
-    <script src="~/js/minicart.js"></script>
-    <script>
-        paypal.minicart.render();
 
-        paypal.minicart.cart.on('checkout', function (evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
-            }
-
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-                evt.preventDefault();
-            }
-        });</script>
-
-    <!--Facebook-->
-    <div id="fb-root"></div>
-    <script>
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=345381992927311&autoLogAppEvents=1';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
-
-    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

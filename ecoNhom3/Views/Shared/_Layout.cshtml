@@ -6,19 +6,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewData["Title"] - ecoNhom3</title>
+    <title> @ViewData["Title"] - econhom3 </title>
 
- 
+    @RenderSection("OpenGraph", required: false)
+
+    @RenderSection("OpenGraph1", required: false)
+
+
+    <meta charset="utf-8">
     <link href="~/css/mycss.css" rel="stylesheet" asp-append-version="true" />
     <link rel="shortcut icon" type="image/ico" href="~/images/logo.jpg" />
     <link rel="icon" type="image/ico" href="~/images/logo.jpg" />
     <link rel="apple-touch-icon" type="image/ico" href="~/images/logo.jpg" />
 
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Grocery Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -62,8 +63,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
     </style>
-    
-    
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153795173-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-153795173-1');
+    </script>
+
+
 </head>
 <body>
 
@@ -103,8 +114,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <div class="product_list_header">
 
-                <a asp-action="Index" asp-controller="Cart">
-                    <input type="submit" name="name" value="Giỏ Hàng" class="button" />
+                <a asp-action="Index" asp-controller="Cart" >
+                    <i class="fa fa-shopping-cart" style="font-size:40px; color:yellow "></i>
                 </a>
             </div>
             <div class="nav navbar-nav navbar-right" style="margin-right:10px;">
@@ -149,7 +160,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
-        
+
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5de5f2acbef31da9"></script>
 
@@ -340,7 +351,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
 
-                        <div class="col-md-2 col-sm-4">
+                        <div class="col-md-3 col-sm-4">
                             <p>
                                 <button type="submit" class="btn btn-block btn-submit" name="subscribe">
                                     Đăng Ký <i class="fa fa-arrow-right"></i>
@@ -396,25 +407,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });</script>
     <!-- //here ends scrolling icon -->
     <script src="~/js/minicart.js"></script>
-    <script>
-        paypal.minicart.render();
-
-        paypal.minicart.cart.on('checkout', function (evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
-            }
-
-            if (total < 3) {
-                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-                evt.preventDefault();
-            }
-        });</script>
+   
 
 
 
