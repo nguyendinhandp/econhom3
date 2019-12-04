@@ -49,8 +49,7 @@ namespace ecoNhom3
             {
                 option.IdleTimeout = TimeSpan.FromMinutes(30);
             });
-
-            /**/
+            
 
         }
 
@@ -78,7 +77,8 @@ namespace ecoNhom3
           
             app.UseMvc(routes =>
             {
-             
+
+               
                 routes.MapRoute(
                     
                     name: "default",
