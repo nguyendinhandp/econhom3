@@ -7,6 +7,11 @@
 
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\robots.txt" />
+    <None Include="wwwroot\sitemap.xml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.2.1" />

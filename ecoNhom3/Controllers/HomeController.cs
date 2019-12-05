@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using ecoNhom3.Models;
-
+using System.Reflection;
 
 namespace ecoNhom3.Controllers
 {
@@ -105,7 +105,8 @@ namespace ecoNhom3.Controllers
 
             return View();
         }
-      
 
+       
+     
     }
 }

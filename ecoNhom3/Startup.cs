@@ -34,8 +34,15 @@ namespace ecoNhom3
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-     
-           
+
+            
+
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute("/robotstxt", "/Robots.Txt");
+            });
+            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
             services.AddMvc();
@@ -50,6 +57,9 @@ namespace ecoNhom3
                 option.IdleTimeout = TimeSpan.FromMinutes(30);
             });
             
+           
+
+
 
         }
 
@@ -72,13 +82,20 @@ namespace ecoNhom3
             app.UseStaticFiles();
             app.UseCookiePolicy();
             
-         
+
+
             app.UseSession();
+
+            
           
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    "sitemap",
+                    "sitemap.xml",
+                    new { controller = "Home", action = "sitemap" }
+                );
 
-               
                 routes.MapRoute(
                     
                     name: "default",
