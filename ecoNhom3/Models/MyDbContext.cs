@@ -36,9 +36,9 @@ namespace ecoNhom3.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("workstation id = econhom3.mssql.somee.com; packet size = 4096; user id = econhom3_SQLLogin_1; pwd = m5deyge5q2; data source = econhom3.mssql.somee.com; persist security info = False; initial catalog = econhom3");
+                //optionsBuilder.UseSqlServer("workstation id = econhom3.mssql.somee.com; packet size = 4096; user id = econhom3_SQLLogin_1; pwd = m5deyge5q2; data source = econhom3.mssql.somee.com; persist security info = False; initial catalog = econhom3");
 
-                //optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=QLNUOC;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=QLNUOC;Integrated Security=True");
             }
         }
 
