@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ecoNhom3.Models;
 using Microsoft.AspNetCore.Session;
-
+using ecoNhom3.Paypal;
 
 namespace ecoNhom3.Controllers
 {
@@ -37,7 +37,8 @@ namespace ecoNhom3.Controllers
                 ViewBag.total = cart.Sum(item => item.Price * item.Quantity);
 
             }
-
+            PayPalConfig payPalConfig = PayPalService.GetPayPalConfig();
+            ViewBag.payPalConfig = payPalConfig;
             return View();
         }
 

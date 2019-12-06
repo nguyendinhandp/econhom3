@@ -47,31 +47,60 @@
                     <td></td>
                     <td class="text-right">Tổng thành tiền:</td>
                     <td> @String.Format("{0:0,0 đ}", ViewBag.total)</td>
-                 
+
                 </tr>
 
             </table>
 
+
             @if (Context.Session.GetInt32("MaTv") == null)
             {
-                <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Vui lòng đăng nhập để thanh toán!');"> Lập Đơn Hàng </a>
+                <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Vui lòng đăng nhập để thanh toán!');"> Lưu đơn hàng </a>
             }
             else
             {
                 if (ViewBag.total == 0)
                 {
-                    <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Giỏ hàng của bạn đang trống, Vui lòng mua hàng!!! ');"> Lập Đơn Hàng </a>
+                    <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " href="#" onclick="return confirm('Giỏ hàng của bạn đang trống, Vui lòng mua hàng!!! ');"> Lưu đơn hàng </a>
                 }
                 else
                 {
-                    <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " asp-controller="HoaDons" asp-action="Create"> Lập Đơn Hàng </a>
+                    <a style="background-color:coral; color:white; padding: 10px 10px 10px 10px; font-size:20px; " asp-controller="HoaDons" asp-action="Create"> Lưu đơn hàng </a>
                 }
 
             }
 
+
+
         </div>
+        <br />
+        <br />
+        
+        <div>
+            <p style="color: brown; font-weight:bolder">Thanh toán trực tuyến: </p>
+            <br />
+            <form method="post" action="@ViewBag.payPalConfig.PostUrl">
+                <input type="hidden" name="upload" value="1" />
+                <input type="hidden" name="return" value="@ViewBag.payPalConfig.ReturnUrl" />
+                <input type="hidden" name="cmd" value="_cart" />
+                <input type="hidden" name="business" value="@ViewBag.payPalConfig.Business" />
 
-
+                @{
+                    var index = 1;
+                }
+                @foreach (var product in ViewBag.cart)
+                {
+                    double Price = product.Price / 23000;
+                    <input type="hidden" name="item_number_@index" value="@product.MaHh" />
+                    <input type="hidden" name="item_name_@index" value="@product.TenHh" />
+                    <input type="hidden" name="amount_@index" value="@Price" />
+                    <input type="hidden" name="quantity_@index" value="@product.Quantity" />
+                    index++;
+                }
+                <input type="image" style="width:180px; height:50px;" src="~/images/paypal.png">
+            </form>
+            <br />
+        </div>
 
 
 
